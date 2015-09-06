@@ -1,14 +1,15 @@
 //
 //  ViewController.h
-//  APStatsSolver
+//  TessTest
 //
-//  Created by Skyler Arnold on 9/4/15.
+//  Created by Sky Arnold on 8/22/15.
 //  Copyright (c) 2015 Skyler Arnold. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import <TesseractOCR/TesseractOCR.h>
 
-@interface ViewController : UIViewController
+@interface OCRViewController : UIViewController <G8TesseractDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 
 @end

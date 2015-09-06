@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CropImageViewController : UIViewController
-
+@interface CropImageViewController : UIViewController <UIGestureRecognizerDelegate>
+@property (nonatomic, strong) UIImage *image;
 @end

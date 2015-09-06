@@ -9,11 +9,19 @@
 /* Begin PBXBuildFile section */
 		D45F59EF1B9A91F3006E65BD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D45F59EE1B9A91F3006E65BD /* main.m */; };
 		D45F59F21B9A91F3006E65BD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D45F59F11B9A91F3006E65BD /* AppDelegate.m */; };
-		D45F59F51B9A91F3006E65BD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D45F59F41B9A91F3006E65BD /* ViewController.m */; };
+		D45F59F51B9A91F3006E65BD /* OCRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D45F59F41B9A91F3006E65BD /* OCRViewController.m */; };
 		D45F59F81B9A91F3006E65BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D45F59F61B9A91F3006E65BD /* Main.storyboard */; };
 		D45F59FA1B9A91F3006E65BD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D45F59F91B9A91F3006E65BD /* Images.xcassets */; };
 		D45F59FD1B9A91F3006E65BD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D45F59FB1B9A91F3006E65BD /* LaunchScreen.xib */; };
 		D45F5A091B9A91F3006E65BD /* APStatsSolverTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D45F5A081B9A91F3006E65BD /* APStatsSolverTests.m */; };
+		D47B82151B9A95B800279229 /* tesseract-ocr-eng-data in Resources */ = {isa = PBXBuildFile; fileRef = D47B82141B9A95B800279229 /* tesseract-ocr-eng-data */; };
+		D47B821A1B9A960300279229 /* SimAutomatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D47B82171B9A960300279229 /* SimAutomatorViewController.m */; };
+		D47B821B1B9A960300279229 /* ViewSimulationResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D47B82191B9A960300279229 /* ViewSimulationResultsViewController.m */; };
+		D47B82201B9AA2AF00279229 /* CropImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D47B821F1B9AA2AF00279229 /* CropImageViewController.m */; };
+		D47B82231B9AA5B300279229 /* CropRectDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = D47B82221B9AA5B300279229 /* CropRectDisplayView.m */; };
+		D49A12331B9B7BF4002AE03A /* CropViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D49A12321B9B7BF4002AE03A /* CropViewController.storyboard */; };
+		D49A12351B9B7FAB002AE03A /* CropImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D49A12341B9B7FAB002AE03A /* CropImageView.xib */; };
+		E3353DE214E0686F52248216 /* libPods-APStatsSolver.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3428F6111D5583147BA74F2 /* libPods-APStatsSolver.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,19 +35,33 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		446A66DADA986E13862AB932 /* Pods-APStatsSolver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-APStatsSolver.release.xcconfig"; path = "Pods/Target Support Files/Pods-APStatsSolver/Pods-APStatsSolver.release.xcconfig"; sourceTree = "<group>"; };
+		983655AADD333627DBD52186 /* Pods-APStatsSolver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-APStatsSolver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-APStatsSolver/Pods-APStatsSolver.debug.xcconfig"; sourceTree = "<group>"; };
+		C3428F6111D5583147BA74F2 /* libPods-APStatsSolver.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-APStatsSolver.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D45F59E91B9A91F3006E65BD /* APStatsSolver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APStatsSolver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D45F59ED1B9A91F3006E65BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D45F59EE1B9A91F3006E65BD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D45F59F01B9A91F3006E65BD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D45F59F11B9A91F3006E65BD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D45F59F31B9A91F3006E65BD /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		D45F59F41B9A91F3006E65BD /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D45F59F31B9A91F3006E65BD /* OCRViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCRViewController.h; sourceTree = "<group>"; };
+		D45F59F41B9A91F3006E65BD /* OCRViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCRViewController.m; sourceTree = "<group>"; };
 		D45F59F71B9A91F3006E65BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D45F59F91B9A91F3006E65BD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D45F59FC1B9A91F3006E65BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		D45F5A021B9A91F3006E65BD /* APStatsSolverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = APStatsSolverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D45F5A071B9A91F3006E65BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D45F5A081B9A91F3006E65BD /* APStatsSolverTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APStatsSolverTests.m; sourceTree = "<group>"; };
+		D47B82141B9A95B800279229 /* tesseract-ocr-eng-data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "tesseract-ocr-eng-data"; sourceTree = SOURCE_ROOT; };
+		D47B82161B9A960300279229 /* SimAutomatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimAutomatorViewController.h; sourceTree = "<group>"; };
+		D47B82171B9A960300279229 /* SimAutomatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimAutomatorViewController.m; sourceTree = "<group>"; };
+		D47B82181B9A960300279229 /* ViewSimulationResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewSimulationResultsViewController.h; sourceTree = "<group>"; };
+		D47B82191B9A960300279229 /* ViewSimulationResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewSimulationResultsViewController.m; sourceTree = "<group>"; };
+		D47B821E1B9AA2AF00279229 /* CropImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropImageViewController.h; sourceTree = "<group>"; };
+		D47B821F1B9AA2AF00279229 /* CropImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropImageViewController.m; sourceTree = "<group>"; };
+		D47B82211B9AA5B300279229 /* CropRectDisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropRectDisplayView.h; sourceTree = "<group>"; };
+		D47B82221B9AA5B300279229 /* CropRectDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropRectDisplayView.m; sourceTree = "<group>"; };
+		D49A12321B9B7BF4002AE03A /* CropViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CropViewController.storyboard; sourceTree = "<group>"; };
+		D49A12341B9B7FAB002AE03A /* CropImageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CropImageView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3353DE214E0686F52248216 /* libPods-APStatsSolver.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,12 +83,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BAD52952107315ED6E2C6B01 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C3428F6111D5583147BA74F2 /* libPods-APStatsSolver.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE1942EC615EABC105CA345A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				983655AADD333627DBD52186 /* Pods-APStatsSolver.debug.xcconfig */,
+				446A66DADA986E13862AB932 /* Pods-APStatsSolver.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D45F59E01B9A91F3006E65BD = {
 			isa = PBXGroup;
 			children = (
 				D45F59EB1B9A91F3006E65BD /* APStatsSolver */,
 				D45F5A051B9A91F3006E65BD /* APStatsSolverTests */,
 				D45F59EA1B9A91F3006E65BD /* Products */,
+				CE1942EC615EABC105CA345A /* Pods */,
+				BAD52952107315ED6E2C6B01 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,8 +125,13 @@
 			children = (
 				D45F59F01B9A91F3006E65BD /* AppDelegate.h */,
 				D45F59F11B9A91F3006E65BD /* AppDelegate.m */,
-				D45F59F31B9A91F3006E65BD /* ViewController.h */,
-				D45F59F41B9A91F3006E65BD /* ViewController.m */,
+				D45F59F31B9A91F3006E65BD /* OCRViewController.h */,
+				D45F59F41B9A91F3006E65BD /* OCRViewController.m */,
+				D47B82161B9A960300279229 /* SimAutomatorViewController.h */,
+				D47B82171B9A960300279229 /* SimAutomatorViewController.m */,
+				D4B924901B9B713600C0C1D4 /* Image cropping */,
+				D47B82181B9A960300279229 /* ViewSimulationResultsViewController.h */,
+				D47B82191B9A960300279229 /* ViewSimulationResultsViewController.m */,
 				D45F59F61B9A91F3006E65BD /* Main.storyboard */,
 				D45F59F91B9A91F3006E65BD /* Images.xcassets */,
 				D45F59FB1B9A91F3006E65BD /* LaunchScreen.xib */,
@@ -97,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				D45F59ED1B9A91F3006E65BD /* Info.plist */,
+				D47B82141B9A95B800279229 /* tesseract-ocr-eng-data */,
 				D45F59EE1B9A91F3006E65BD /* main.m */,
 			);
 			name = "Supporting Files";
@@ -119,6 +167,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		D4B924901B9B713600C0C1D4 /* Image cropping */ = {
+			isa = PBXGroup;
+			children = (
+				D47B821E1B9AA2AF00279229 /* CropImageViewController.h */,
+				D47B821F1B9AA2AF00279229 /* CropImageViewController.m */,
+				D49A12341B9B7FAB002AE03A /* CropImageView.xib */,
+				D47B82211B9AA5B300279229 /* CropRectDisplayView.h */,
+				D47B82221B9AA5B300279229 /* CropRectDisplayView.m */,
+				D49A12321B9B7BF4002AE03A /* CropViewController.storyboard */,
+			);
+			name = "Image cropping";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -126,9 +187,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D45F5A0C1B9A91F3006E65BD /* Build configuration list for PBXNativeTarget "APStatsSolver" */;
 			buildPhases = (
+				6349225CE1EBFA5C6DB1BD09 /* Check Pods Manifest.lock */,
 				D45F59E51B9A91F3006E65BD /* Sources */,
 				D45F59E61B9A91F3006E65BD /* Frameworks */,
 				D45F59E71B9A91F3006E65BD /* Resources */,
+				4B3CE1B664DA634D458B576C /* Copy Pods Resources */,
+				D4B9248F1B9ABD7D00C0C1D4 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -168,6 +232,7 @@
 				TargetAttributes = {
 					D45F59E81B9A91F3006E65BD = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 4D9GX636ZZ;
 					};
 					D45F5A011B9A91F3006E65BD = {
 						CreatedOnToolsVersion = 6.4;
@@ -199,9 +264,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D49A12351B9B7FAB002AE03A /* CropImageView.xib in Resources */,
 				D45F59F81B9A91F3006E65BD /* Main.storyboard in Resources */,
 				D45F59FD1B9A91F3006E65BD /* LaunchScreen.xib in Resources */,
+				D49A12331B9B7BF4002AE03A /* CropViewController.storyboard in Resources */,
 				D45F59FA1B9A91F3006E65BD /* Images.xcassets in Resources */,
+				D47B82151B9A95B800279229 /* tesseract-ocr-eng-data in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,14 +282,64 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4B3CE1B664DA634D458B576C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-APStatsSolver/Pods-APStatsSolver-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6349225CE1EBFA5C6DB1BD09 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D4B9248F1B9ABD7D00C0C1D4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" c557cdd9489c6f7f599d82abcf26cfc111cccc84 99e880363b4ef340a658e293e3341e149fabc23b91b0685a222bcc9c95f0a6e7";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D45F59E51B9A91F3006E65BD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D45F59F51B9A91F3006E65BD /* ViewController.m in Sources */,
+				D47B82201B9AA2AF00279229 /* CropImageViewController.m in Sources */,
+				D45F59F51B9A91F3006E65BD /* OCRViewController.m in Sources */,
+				D47B821B1B9A960300279229 /* ViewSimulationResultsViewController.m in Sources */,
+				D47B82231B9AA5B300279229 /* CropRectDisplayView.m in Sources */,
 				D45F59F21B9A91F3006E65BD /* AppDelegate.m in Sources */,
 				D45F59EF1B9A91F3006E65BD /* main.m in Sources */,
+				D47B821A1B9A960300279229 /* SimAutomatorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,8 +465,10 @@
 		};
 		D45F5A0D1B9A91F3006E65BD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 983655AADD333627DBD52186 /* Pods-APStatsSolver.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = APStatsSolver/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -357,8 +477,10 @@
 		};
 		D45F5A0E1B9A91F3006E65BD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 446A66DADA986E13862AB932 /* Pods-APStatsSolver.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = APStatsSolver/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -418,6 +540,7 @@
 				D45F5A0E1B9A91F3006E65BD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D45F5A0F1B9A91F3006E65BD /* Build configuration list for PBXNativeTarget "APStatsSolverTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +549,7 @@
 				D45F5A111B9A91F3006E65BD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

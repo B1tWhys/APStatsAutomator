@@ -143,13 +143,6 @@
 }
 
 - (void) viewResults {
-    {
-//    UITableViewController *resultsTableView = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
-//    resultsTableView.tableView.delegate = self;
-//    resultsTableView.tableView.dataSource = self;
-//    resultsTableView.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(backPressed)];
-//    [self.navigationController pushViewController:resultsTableView animated:true];
-    }
     [self performSegueWithIdentifier:@"segueToResultsVC" sender:self];
 }
 
@@ -180,7 +173,6 @@
         ViewSimulationResultsViewController *destinationVC = segue.destinationViewController;
         destinationVC.dataArray = self.dataArray;
         destinationVC.resultsArray = self.resultsArray;
-
     }
 }
 @end

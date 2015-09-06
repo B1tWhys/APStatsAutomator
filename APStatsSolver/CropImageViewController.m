@@ -62,8 +62,6 @@
                                              touchLocation.y,
                                              touchLocation.x - CGRectGetMinX(self.cropView.frame),
                                              CGRectGetMaxY(self.cropView.frame) - touchLocation.y);
-//                                             CGRectGetMaxX(self.cropView.frame) - touchLocation.x,
-//                                             CGRectGetMaxY(self.cropView.frame) - touchLocation.y);
             
             
             break;

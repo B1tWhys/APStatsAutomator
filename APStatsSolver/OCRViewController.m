@@ -30,6 +30,8 @@
         self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
         self.imagePicker.delegate = self;
         self.imagePicker.mediaTypes = @[(NSString *) kUTTypeImage];
+        
+        
         [self presentViewController:self.imagePicker animated:YES completion:^{}];
     }
 //    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"CropViewController" bundle:[NSBundle mainBundle]];
@@ -41,7 +43,7 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"CropViewController" bundle:[NSBundle mainBundle]];
     CropImageViewController *cropVC = [storyboard instantiateInitialViewController];
     cropVC.image = [info objectForKey: UIImagePickerControllerOriginalImage];
-    [self.navigationController presentViewController:cropVC animated:true completion:^{}];
+    [picker pushViewController:cropVC animated:true];
     
     //    G8Tesseract *tesseract = [[G8Tesseract alloc] initWithLanguage:@"eng" engineMode:G8OCREngineModeTesseractCubeCombined];
 //    tesseract.delegate = self;

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>9EF1490A-CE6D-473D-AC3B-2912F84E15F4</string>
+	<key>IDESourceControlProjectName</key>
+	<string>project</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>41F9724FDEB2ABF68A44CE09B26511491BE0F9BA</key>
+		<string>https://github.com/boldersky/APStatsAutomator.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>APStatsSolver.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>41F9724FDEB2ABF68A44CE09B26511491BE0F9BA</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/boldersky/APStatsAutomator.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>41F9724FDEB2ABF68A44CE09B26511491BE0F9BA</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>41F9724FDEB2ABF68A44CE09B26511491BE0F9BA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>APStatsAutomator</string>
+		</dict>
+	</array>
+</dict>
+</plist>

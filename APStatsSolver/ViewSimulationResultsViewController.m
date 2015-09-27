@@ -45,9 +45,9 @@
 
 - (float) average:(NSArray *)numbers {
     int sum = 0;
-    int count = 0;
+    NSUInteger count = 0;
     float average;
-    count = (int)self.dataArray.count;
+    count = (int) numbers.count;
     for (NSNumber *sample in numbers) {
         sum += sample.intValue;
     }
@@ -62,12 +62,21 @@
     
     if (self.dataIsDatasource) {
         NSArray *trialDataArray = [self.dataArray objectAtIndex:indexPath.section];
-        NSArray *trialResultsArray = [self.resultsArray objectAtIndex:indexPath.section];
+        NSArray *trialResultsArray = nil;
+        if (self.resultsArray.count != 0) {
+            trialResultsArray = [self.resultsArray objectAtIndex:indexPath.section];
+        } // else trialResultsArray is nil
         
         int dataForCell = ((NSNumber *)[trialDataArray objectAtIndex: indexPath.row]).intValue;
         NSString *resultForCell = [trialResultsArray objectAtIndex:indexPath.row];
         
-        NSString *cellString = [NSString stringWithFormat:@"%i - %@", dataForCell, resultForCell];
+        NSString *cellString;
+        
+        if (trialResultsArray != nil) {
+            cellString = [NSString stringWithFormat:@"%i - %@", dataForCell, resultForCell];
+        } else {
+            cellString  = [NSString stringWithFormat:@"%i", dataForCell];
+        }
         tvc.textLabel.text = cellString;
     } else {
         NSString *cellText;
@@ -79,9 +88,10 @@
             } case 1: { // st. dev
                 float standardDeviation;
                 NSMutableArray *devsFromAvg = [NSMutableArray new];
-                float average = [self average:self.dataArray[indexPath.row]];
+                int test = indexPath.row;
+                float average = [self average:self.dataArray[indexPath.section]];
     
-                for (NSNumber *number in self.dataArray[indexPath.row]) {
+                for (NSNumber *number in self.dataArray[indexPath.section]) {
                     [devsFromAvg addObject:[NSNumber numberWithFloat:powf((number.floatValue - average), 2)]];
                 }
                 standardDeviation = powf([self average:devsFromAvg], .5);
@@ -111,6 +121,7 @@
                 }
                 
                 cellText = [NSString stringWithFormat:@"Median: %@", [NSNumber numberWithFloat:resultNum].stringValue];
+                break;
             } case 3:{ // mode
                 NSMutableDictionary *modeCalcDict = [NSMutableDictionary new];
                 for (NSNumber *num in self.dataArray[indexPath.section]) {

@@ -318,9 +318,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Number of trials" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hyY-Em-zbV">
-                                <rect key="frame" x="20" y="72" width="129" height="30"/>
+                                <rect key="frame" x="20" y="72" width="283" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="129" id="qru-oe-qxb"/>
+                                    <constraint firstAttribute="height" constant="30" id="wmU-hX-zOJ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -337,11 +337,11 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="39"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RTv-t0-S8a" id="mWo-yr-Kkb">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="38.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="38"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lti-Eb-hbK">
-                                                    <rect key="frame" x="34" y="8" width="558" height="22.5"/>
+                                                <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lti-Eb-hbK">
+                                                    <rect key="frame" x="34" y="8" width="558" height="23"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                     <connections>
@@ -363,8 +363,24 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1000000" translatesAutoresizingMaskIntoConstraints="NO" id="dGa-In-mQy">
-                                <rect key="frame" x="157" y="72" width="94" height="29"/>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7JI-Mk-c19">
+                                <rect key="frame" x="531" y="72" width="51" height="31"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calulate mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="687-UF-qHt">
+                                <rect key="frame" x="413" y="77" width="110" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="mvm-d1-coC"/>
+                                    <constraint firstAttribute="width" constant="110" id="s1N-q9-OCj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="1000000" translatesAutoresizingMaskIntoConstraints="NO" id="dGa-In-mQy">
+                                <rect key="frame" x="311" y="72" width="94" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="94" id="tNK-QF-xc9"/>
+                                </constraints>
                                 <connections>
                                     <action selector="step:" destination="HX0-rj-xCs" eventType="valueChanged" id="GnZ-Vj-298"/>
                                 </connections>
@@ -372,20 +388,33 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="dGa-In-mQy" firstAttribute="top" secondItem="Q4A-43-IFS" secondAttribute="bottom" constant="8" id="9dg-hn-mcv"/>
                             <constraint firstAttribute="trailing" secondItem="h8A-KK-BWt" secondAttribute="trailing" id="BJi-Ee-6ts"/>
-                            <constraint firstItem="h8A-KK-BWt" firstAttribute="top" secondItem="hyY-Em-zbV" secondAttribute="bottom" constant="8" id="JED-RX-MzC"/>
+                            <constraint firstItem="h8A-KK-BWt" firstAttribute="top" secondItem="7JI-Mk-c19" secondAttribute="bottom" constant="7" id="GOI-KY-NfD"/>
+                            <constraint firstItem="7JI-Mk-c19" firstAttribute="leading" secondItem="687-UF-qHt" secondAttribute="trailing" constant="8" id="Ofr-nD-gU1"/>
+                            <constraint firstItem="7JI-Mk-c19" firstAttribute="top" secondItem="Q4A-43-IFS" secondAttribute="bottom" constant="8" id="YGa-zq-0Q1"/>
+                            <constraint firstItem="hyY-Em-zbV" firstAttribute="top" secondItem="Q4A-43-IFS" secondAttribute="bottom" constant="8" id="af1-sd-Sdj"/>
+                            <constraint firstItem="687-UF-qHt" firstAttribute="leading" secondItem="dGa-In-mQy" secondAttribute="trailing" constant="8" id="cUw-fk-2bY"/>
                             <constraint firstItem="FeV-Gm-Hdm" firstAttribute="top" secondItem="h8A-KK-BWt" secondAttribute="bottom" id="e4T-7x-Pbm"/>
-                            <constraint firstItem="hyY-Em-zbV" firstAttribute="top" secondItem="Q4A-43-IFS" secondAttribute="bottom" constant="8" id="fng-h9-oFW"/>
                             <constraint firstItem="h8A-KK-BWt" firstAttribute="leading" secondItem="fbE-Fq-DYr" secondAttribute="leading" id="gc7-Ab-Vkw"/>
-                            <constraint firstItem="hyY-Em-zbV" firstAttribute="leading" secondItem="fbE-Fq-DYr" secondAttribute="leadingMargin" id="wmC-hu-frm"/>
+                            <constraint firstItem="687-UF-qHt" firstAttribute="top" secondItem="Q4A-43-IFS" secondAttribute="bottom" constant="13" id="q4D-dG-RLH"/>
+                            <constraint firstItem="dGa-In-mQy" firstAttribute="leading" secondItem="hyY-Em-zbV" secondAttribute="trailing" constant="8" id="tvk-n1-4nX"/>
+                            <constraint firstItem="hyY-Em-zbV" firstAttribute="leading" secondItem="fbE-Fq-DYr" secondAttribute="leadingMargin" id="vg9-Os-e3V"/>
+                            <constraint firstItem="7JI-Mk-c19" firstAttribute="trailing" secondItem="fbE-Fq-DYr" secondAttribute="trailingMargin" id="xDJ-5g-RD7"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="ceX-J1-xTa"/>
+                    <navigationItem key="navigationItem" id="ceX-J1-xTa">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="7ki-3O-L2m">
+                            <connections>
+                                <segue destination="ALd-F7-oSO" kind="show" id="Qv4-9A-E9K"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="calculateModeSlider" destination="7JI-Mk-c19" id="z8w-G7-ehS"/>
                         <outlet property="numberOfTrialsTextView" destination="hyY-Em-zbV" id="Sr3-F9-rhF"/>
                         <outlet property="stepper" destination="dGa-In-mQy" id="2KM-Ki-gBp"/>
                         <outlet property="tableView" destination="h8A-KK-BWt" id="ZRW-Yh-r1C"/>
-                        <segue destination="ALd-F7-oSO" kind="show" identifier="SegueToManualInputResults" id="yEV-yP-HZa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7kJ-KZ-udm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -582,6 +611,6 @@
         <image name="InputDataTabBarItem1x" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yEV-yP-HZa"/>
+        <segue reference="Qv4-9A-E9K"/>
     </inferredMetricsTieBreakers>
 </document>

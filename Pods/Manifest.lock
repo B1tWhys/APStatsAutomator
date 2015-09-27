@@ -1,5 +1,5 @@
 PODS:
-  - Crashlytics (3.2.0)
+  - Crashlytics (3.3.1)
   - Fabric (1.4.1):
     - Fabric/Base (= 1.4.1)
   - Fabric/Base (1.4.1)
@@ -13,7 +13,7 @@ DEPENDENCIES:
   - TesseractOCRiOS (= 4.0.0)
 
 SPEC CHECKSUMS:
-  Crashlytics: a29e4f820aa401482b26043dc5d78adf08ac7573
+  Crashlytics: 0e61bdda9def51f1e99720f804eebe94865442b2
   Fabric: 4f718eeca4c02c7d6f6f4e5f0e5f87c63aa38458
   Reveal-iOS-SDK: c9c55cad2729c85f6ced415f1b21857c9a2d8ef9
   TesseractOCRiOS: 90638afbe43d082433f2e76b384c7901d23956df

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface DataEntryTableViewCell : UITableViewCell
-
+@property (weak, nonatomic) IBOutlet UITextField *entryField;
 @end

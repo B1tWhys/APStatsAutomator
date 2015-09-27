@@ -8,6 +8,7 @@
 
 #import "OCRViewController.h"
 #import "CropImageViewController.h"
+#import "ViewSimulationResultsViewController.h"
 
 @import MobileCoreServices;
 
@@ -30,34 +31,42 @@
         self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
         self.imagePicker.delegate = self;
         self.imagePicker.mediaTypes = @[(NSString *) kUTTypeImage];
-        
-        
         [self presentViewController:self.imagePicker animated:YES completion:^{}];
     }
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"CropViewController" bundle:[NSBundle mainBundle]];
-//    CropImageViewController *cropViewController = [storyboard instantiateInitialViewController];
-//    [self.navigationController pushViewController:cropViewController animated:true];
+}
+
+- (NSArray *)parseStringToArray:(NSString *)string {
+    return @[];
+}
+
+- (void)imageCroppingFinishedWithImage:(UIImage *)image {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    ViewSimulationResultsViewController *resultsVC = [storyboard instantiateViewControllerWithIdentifier:@"ResultsTableView"];
+    resultsVC.dataArray = [NSMutableArray arrayWithArray: @[@[@2, @3, @4, @5]]];
+    resultsVC.calcMode = false;
+    [self.navigationController pushViewController:resultsVC animated:true];
+
+    G8Tesseract *tesseract = [[G8Tesseract alloc] initWithLanguage:@"eng" engineMode:G8OCREngineModeTesseractCubeCombined];
+    tesseract.delegate = self;
+
+    tesseract.image = image;
+    [tesseract recognize];
+
+    [self.outputTextView setText: [tesseract recognizedText]];
+
+    [self.imagePicker dismissViewControllerAnimated:true completion:^{}];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"CropViewController" bundle:[NSBundle mainBundle]];
-    CropImageViewController *cropVC = [storyboard instantiateInitialViewController];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    CropImageViewController *cropVC = [storyboard instantiateViewControllerWithIdentifier:@"CropVC"];
     cropVC.image = [info objectForKey: UIImagePickerControllerOriginalImage];
+    cropVC.delegate = self;
     [picker pushViewController:cropVC animated:true];
-    
-    //    G8Tesseract *tesseract = [[G8Tesseract alloc] initWithLanguage:@"eng" engineMode:G8OCREngineModeTesseractCubeCombined];
-//    tesseract.delegate = self;
-//    
-//    tesseract.image = [info objectForKey:UIImagePickerControllerEditedImage];
-//    [tesseract recognize];
-//    
-//    [self.outputTextView setText: [tesseract recognizedText]];
-//    
-//    [self.imagePicker dismissViewControllerAnimated:true completion:^{}];
 }
 
 - (void) imagePickerControllerDidCancel: (UIImagePickerController *) picker {
-    [picker removeFromParentViewController];
+    [self dismissViewControllerAnimated:self.imagePicker completion:^{}];
 }
 
 - (BOOL)shouldCancelImageRecognitionForTesseract:(G8Tesseract *)tesseract {

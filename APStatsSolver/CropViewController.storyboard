@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sGA-c5-h66">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sGA-c5-h66">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Crop Image View Controller-->
@@ -16,23 +18,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VIU-55-1dh">
-                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
-                                <gestureRecognizers/>
-                            </imageView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uQd-uo-oda">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="PVq-VQ-G7K"/>
+                                    <constraint firstAttribute="height" constant="64" id="PVq-VQ-G7K"/>
                                 </constraints>
                                 <items>
-                                    <navigationItem title="Crop" id="aLz-Oc-b7O"/>
+                                    <navigationItem title="Crop" id="aLz-Oc-b7O">
+                                        <barButtonItem key="rightBarButtonItem" title="Done" style="done" id="3uw-fm-EcK">
+                                            <connections>
+                                                <action selector="cropViewController:" destination="sGA-c5-h66" id="d8n-3Z-8hP"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EtT-QW-LdI">
                                 <rect key="frame" x="150" y="172" width="300" height="300"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qrm-eV-ciI">
+                                    <view tag="8" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qrm-eV-ciI">
                                         <rect key="frame" x="8" y="8" width="284" height="284"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.60999999999999999" colorSpace="calibratedRGB"/>
                                     </view>
@@ -131,16 +135,16 @@
                                     <constraint firstAttribute="trailing" secondItem="z11-yZ-mdg" secondAttribute="trailing" id="yQu-Xb-ABF"/>
                                 </constraints>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VIU-55-1dh">
+                                <rect key="frame" x="0.0" y="75" width="600" height="450"/>
+                                <gestureRecognizers/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="VIU-55-1dh" firstAttribute="top" secondItem="uQd-uo-oda" secondAttribute="bottom" id="5jQ-af-3Bn"/>
-                            <constraint firstAttribute="trailing" secondItem="VIU-55-1dh" secondAttribute="trailing" id="O6S-JJ-3RU"/>
-                            <constraint firstItem="VIU-55-1dh" firstAttribute="leading" secondItem="4SY-XK-t7P" secondAttribute="leading" id="XkE-Gi-r6h"/>
                             <constraint firstItem="uQd-uo-oda" firstAttribute="leading" secondItem="4SY-XK-t7P" secondAttribute="leading" id="d0T-SV-guI"/>
                             <constraint firstAttribute="trailing" secondItem="uQd-uo-oda" secondAttribute="trailing" id="k3T-XI-zec"/>
-                            <constraint firstItem="uQd-uo-oda" firstAttribute="top" secondItem="4SY-XK-t7P" secondAttribute="top" id="p2B-Bx-JHl"/>
-                            <constraint firstItem="aDm-3y-wxq" firstAttribute="top" secondItem="VIU-55-1dh" secondAttribute="bottom" id="uhQ-hP-cOi"/>
+                            <constraint firstItem="uQd-uo-oda" firstAttribute="top" secondItem="4SY-XK-t7P" secondAttribute="topMargin" id="p2B-Bx-JHl"/>
                         </constraints>
                     </view>
                     <connections>

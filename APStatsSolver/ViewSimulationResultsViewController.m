@@ -60,8 +60,6 @@
     UITableViewCell *tvc = [tableView dequeueReusableCellWithIdentifier:@"StatsViewerTableViewCell"];
     if (!tvc) tvc = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"StatsViewerTableViewCell"];
     
-
-    
     if (self.dataIsDatasource) {
         NSArray *trialDataArray = [self.dataArray objectAtIndex:indexPath.section];
         NSArray *trialResultsArray = [self.resultsArray objectAtIndex:indexPath.section];

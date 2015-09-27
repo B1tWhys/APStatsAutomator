@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ManualDataEntryViewController : UIViewController
+@interface ManualDataEntryViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @end

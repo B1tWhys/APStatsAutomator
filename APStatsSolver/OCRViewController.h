@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <TesseractOCR/TesseractOCR.h>
+#import "CropImageViewController.h"
 
-@interface OCRViewController : UIViewController <G8TesseractDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface OCRViewController : UIViewController <G8TesseractDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CropImageViewControllerDelegate>
 
 
 @end

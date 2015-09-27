@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol CropImageViewControllerDelegate <NSObject>
+
+- (void) imageCroppingFinishedWithImage:(UIImage *)image;
+
+@end
+
 @interface CropImageViewController : UIViewController <UIGestureRecognizerDelegate>
+@property (nonatomic, strong) id <CropImageViewControllerDelegate> delegate;
 @property (nonatomic, strong) UIImage *image;
 @end

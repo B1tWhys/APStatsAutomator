@@ -10,7 +10,7 @@
 #import "CropRectDisplayView.h"
 
 @interface CropImageViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIView *cropView;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *resizingSquares;
 @property (nonatomic) CGRect cropViewFrameAtStartOfPan;
@@ -20,7 +20,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self.view sendSubviewToBack:self.imageView];
+    
+    [self.imageView addConstraint:[NSLayoutConstraint constraintWithItem:self.imageView
+                                                               attribute:NSLayoutAttributeWidth
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:self.imageView
+                                                               attribute:NSLayoutAttributeHeight
+                                                              multiplier:(self.image.size.width/self.image.size.height)
+                                                                constant:0]];
+    
     [self.imageView setImage:self.image];
     
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
@@ -38,6 +48,16 @@
         UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(scaleCropSelectorWithGestureRecognizer:)];
         [square addGestureRecognizer:recognizer];
     }
+}
+
+- (IBAction)cropViewController:(UIBarButtonItem *)sender
+{
+    UIImage *croppedImage;
+    
+    CGRect cropRect = self.cropView.frame;
+    CGImageRef imageRef = CGImageCreateWithImageInRect(self.image.CGImage, CGRectMake(cropRect.origin.x, cropRect.origin.y, cropRect.size.height, cropRect.size.width));
+    croppedImage = [UIImage imageWithCGImage:imageRef];
+    [self.delegate imageCroppingFinishedWithImage:croppedImage];
 }
 
 - (void) scaleCropSelectorWithGestureRecognizer: (UIPanGestureRecognizer *)recognizer {
@@ -100,6 +120,10 @@
         } default:
             break;
     }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
 }
 
 - (void)didReceiveMemoryWarning {

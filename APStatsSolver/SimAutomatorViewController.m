@@ -34,11 +34,6 @@
     self.successListInputField.delegate = self;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     self.dataArray = [NSMutableArray new];
     self.resultsArray = [NSMutableArray new];

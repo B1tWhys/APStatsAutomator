@@ -359,7 +359,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		EA2E1D30D788DD86DDE974FC5E57AF73 /* PBXContainerItemProxy */ = {
+		4285BDF446A6D4AD686ECAAE55FC5969 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
@@ -1617,7 +1617,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				DFD8EFE5DDFCCAA3B4C167DA636FFBAF /* PBXTargetDependency */,
+				2652C41A455398D3BE244431762853BB /* PBXTargetDependency */,
 			);
 			name = "Pods-APStatsSolver";
 			productName = "Pods-APStatsSolver";
@@ -1694,11 +1694,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		DFD8EFE5DDFCCAA3B4C167DA636FFBAF /* PBXTargetDependency */ = {
+		2652C41A455398D3BE244431762853BB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = TesseractOCRiOS;
 			target = 767A8F62EE74321E0B51ABCDFAC31DE6 /* TesseractOCRiOS */;
-			targetProxy = EA2E1D30D788DD86DDE974FC5E57AF73 /* PBXContainerItemProxy */;
+			targetProxy = 4285BDF446A6D4AD686ECAAE55FC5969 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

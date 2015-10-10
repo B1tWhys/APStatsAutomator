@@ -20,13 +20,27 @@
     // Do any additional setup after loading the view.
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    
-    [self.navigationController setNavigationBarHidden:false];
-}
+    NSMutableArray *fullArray = [NSMutableArray new];
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    for (NSMutableArray *array in self.dataArray) {
+        if (array.count != 0) {
+            [array sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+                if (obj1 < obj2) {
+                    return NSOrderedAscending;
+                } else if (obj1 > obj2) {
+                    return NSOrderedDescending;
+                } else {
+                    return NSOrderedSame;
+                }
+            }];
+            
+            [fullArray addObject:array];
+        }
+    }
+    
+    self.dataArray = fullArray;
+
+    [self.navigationController setNavigationBarHidden:false];
 }
 
 - (BOOL)dataIsDatasource {
@@ -40,7 +54,7 @@
                        options:transitionType
                     animations:^{
                            [self.tableView reloadData];
-                       } completion:^(BOOL finished) {}];
+                    } completion:^(BOOL finished) {}];
 }
 
 - (float) average:(NSArray *)numbers {
@@ -56,6 +70,31 @@
     return average;
 }
 
+- (float) median:(NSArray *)array {
+    NSMutableArray *trialArray = [array mutableCopy];
+    [trialArray sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        if (obj1 < obj2) {
+            return NSOrderedAscending;
+        } else if (obj1 > obj2) {
+            return NSOrderedDescending;
+        } else {
+            return NSOrderedSame;
+        }
+    }];
+    
+    float resultNum;
+    
+    if (!(trialArray.count % 2)) { // if count is even
+        float num1 = ((NSNumber *)trialArray[trialArray.count/2 -1]).floatValue;
+        float num2 = ((NSNumber *)trialArray[(trialArray.count/2)]).floatValue;
+        
+        resultNum = (num1 + num2)/2.0;
+    } else { // if count is odd
+        resultNum = ((NSNumber *)trialArray[(trialArray.count-1)/2]).intValue;
+    }
+    return resultNum;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *tvc = [tableView dequeueReusableCellWithIdentifier:@"StatsViewerTableViewCell"];
     if (!tvc) tvc = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"StatsViewerTableViewCell"];
@@ -65,13 +104,13 @@
         NSArray *trialResultsArray = nil;
         if (self.resultsArray.count != 0) {
             trialResultsArray = [self.resultsArray objectAtIndex:indexPath.section];
-        } // else trialResultsArray is nil
+        }
         
         int dataForCell = ((NSNumber *)[trialDataArray objectAtIndex: indexPath.row]).intValue;
         NSString *resultForCell = [trialResultsArray objectAtIndex:indexPath.row];
         
         NSString *cellString;
-        
+
         if (trialResultsArray != nil) {
             cellString = [NSString stringWithFormat:@"%i - %@", dataForCell, resultForCell];
         } else {
@@ -80,7 +119,7 @@
         tvc.textLabel.text = cellString;
     } else {
         NSString *cellText;
-        // median. q1, q3, stdev.
+        
         switch (indexPath.row) {
             case 0: { // avg
                 cellText = [NSString stringWithFormat:@"Average: %@", [NSNumber numberWithFloat:[self average:self.dataArray[indexPath.row]]].stringValue];
@@ -88,41 +127,78 @@
             } case 1: { // st. dev
                 float standardDeviation;
                 NSMutableArray *devsFromAvg = [NSMutableArray new];
-                int test = indexPath.row;
                 float average = [self average:self.dataArray[indexPath.section]];
-    
+
                 for (NSNumber *number in self.dataArray[indexPath.section]) {
                     [devsFromAvg addObject:[NSNumber numberWithFloat:powf((number.floatValue - average), 2)]];
                 }
-                standardDeviation = powf([self average:devsFromAvg], .5);
+                
+                float sum = 0;
+                for (NSNumber *num in devsFromAvg) {
+                    float floatNum = num.floatValue;
+                    sum += floatNum;
+                }
+                
+                standardDeviation = powf((sum/(devsFromAvg.count - 1)), .5); // TODO: change this to be accurate
                 cellText = [NSString stringWithFormat:@"Standard deviation: %@", [NSNumber numberWithFloat:standardDeviation].stringValue];
                 break;
-            } case 2: { // median
+            } case 2: { // q1
                 NSMutableArray *trialArray = [self.dataArray[indexPath.section] mutableCopy];
-                [trialArray sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-                    if (obj1 < obj2) {
-                        return NSOrderedAscending;
-                    } else if (obj1 > obj2) {
-                        return NSOrderedDescending;
-                    } else {
-                        return NSOrderedSame;
-                    }
-                }];
+                NSUInteger length = ((trialArray.count % 2) == 0) ? ((int)(trialArray.count/2)) : (int)((trialArray.count + 1) / 2);
+                
+                NSRange firstHalfRange = NSMakeRange(0, length);
+                NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:firstHalfRange];
+                NSArray *firstHalfArray = [trialArray objectsAtIndexes:indexSet];
+                
+                float q1 = [self median:firstHalfArray];
+                cellText = [NSString stringWithFormat:@"q1: %@", [NSNumber numberWithFloat:q1].stringValue];
+                break;
+            } case 3: { // median
+                NSMutableArray *trialArray = [self.dataArray[indexPath.section] mutableCopy];
                 
                 float resultNum;
-                
-                if (!(trialArray.count % 2)) { // if count is even
-                    float num1 = ((NSNumber *)trialArray[trialArray.count/2]).floatValue;
-                    float num2 = ((NSNumber *)trialArray[(trialArray.count/2) + 1]).floatValue;
-                    
-                    resultNum = (num1 + num2)/2.0;
-                } else { // if count is odd
-                    resultNum = ((NSNumber *)trialArray[(trialArray.count-1)/2]).intValue;
-                }
+                resultNum = [self median:trialArray];
                 
                 cellText = [NSString stringWithFormat:@"Median: %@", [NSNumber numberWithFloat:resultNum].stringValue];
                 break;
-            } case 3:{ // mode
+            } case 4: { // q3
+                NSMutableArray *trialArray = [self.dataArray[indexPath.section] mutableCopy];
+                NSUInteger length = ((trialArray.count % 2) == 0) ? ((int)(trialArray.count/2)) : (int)((trialArray.count + 1) / 2);
+                NSUInteger startPosition = ((trialArray.count % 2) == 0) ? (int)((trialArray.count) / 2) : ((trialArray.count - 1) /2);
+                
+                NSRange secondHalfRange = NSMakeRange(startPosition, length);
+                NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:secondHalfRange];
+                NSArray *firstHalfArray = [trialArray objectsAtIndexes:indexSet];
+                
+                float q3 = [self median:firstHalfArray];
+                cellText = [NSString stringWithFormat:@"q3: %@", [NSNumber numberWithFloat:q3].stringValue];
+                break;
+            } case 5: { // IQR
+                NSMutableArray *trialArray = [self.dataArray[indexPath.section] mutableCopy];
+                NSUInteger length = ((trialArray.count % 2) == 0) ? ((int)(trialArray.count/2)) : (int)((trialArray.count + 1) / 2);
+                
+                
+                NSRange firstHalfRange = NSMakeRange(0, length);
+                NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:firstHalfRange];
+                NSArray *firstHalfArray = [trialArray objectsAtIndexes:indexSet];
+                
+                float q1 = [self median:firstHalfArray];
+                
+                length = ((trialArray.count % 2) == 0) ? ((int)(trialArray.count/2)) : (int)((trialArray.count + 1) / 2);
+                NSUInteger startPosition = ((trialArray.count % 2) == 0) ? (int)((trialArray.count - 1) / 2) : (trialArray.count/2);
+                
+                firstHalfRange = NSMakeRange(startPosition, length);
+                indexSet = [NSIndexSet indexSetWithIndexesInRange:firstHalfRange];
+                firstHalfArray = [trialArray objectsAtIndexes:indexSet];
+                
+                float q3 = [self median:firstHalfArray];
+                
+                float IQR = q3-q1;
+                cellText = [NSString stringWithFormat:@"IQR: %@", [NSNumber numberWithFloat:IQR].stringValue];
+                
+                break;
+                
+            } case 6: { // mode
                 NSMutableDictionary *modeCalcDict = [NSMutableDictionary new];
                 for (NSNumber *num in self.dataArray[indexPath.section]) {
                     if (![modeCalcDict objectForKey:num]) {
@@ -164,21 +240,18 @@
     
     return tvc;
 }
-/*
- 
-*/
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSArray *sectionArray = [self.dataArray objectAtIndex:section];
     int numberOfRowsInSection = (int)sectionArray.count;
-    
     
     if (self.dataIsDatasource) {
         return numberOfRowsInSection;
     } else {
         if (self.calcMode) {
-            return 4;
+            return 7;
         } else {
-            return 3;
+            return 6;
         }
     }
 }
@@ -196,15 +269,5 @@
 {
     return [NSString stringWithFormat:@"Trial: %i", (int)section + 1];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

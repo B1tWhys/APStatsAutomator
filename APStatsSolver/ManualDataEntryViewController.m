@@ -162,29 +162,6 @@
     return [NSString stringWithFormat:@"Trial: %i", (int)section + 1];
 }
 
-/*
- - (NSArray *)parseStringIntoResultsArray:(NSString *)inputStr {
- NSString *denseInput = [inputStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
- NSArray *commaSeperatedArray = [denseInput componentsSeparatedByString:@","];
- NSMutableArray *finalArray = [NSMutableArray new];
- for (NSString *segment in commaSeperatedArray) {
- if ([segment containsString:@"-"]) {
- NSMutableArray *rangeString = [[segment componentsSeparatedByString:@"-"] mutableCopy];
- int lowerBound = ((NSString *)rangeString[0]).intValue;
- int upperBound = ((NSString *)rangeString[1]).intValue;
- for (int i = lowerBound; i <= upperBound; i++){
- [rangeString addObject:[NSNumber numberWithInt:i]];
- }
- [finalArray addObjectsFromArray:rangeString];
- } else {
- [finalArray addObject:[NSNumber numberWithInt:segment.intValue]];
- }
- }
- return finalArray;
- }
- 
- */
-
 - (NSArray *) parseDataString {
     NSString *cleanInput = [self.spaceDelimtedData.text stringByReplacingOccurrencesOfString:@"," withString:@""];
     NSArray *stringsArray = [cleanInput componentsSeparatedByString:@" "];

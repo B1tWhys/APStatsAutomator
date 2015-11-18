@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewSimulationResultsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface ViewResultsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (strong, nonatomic) NSMutableArray *resultsArray;
 @property (nonatomic) BOOL calcMode;

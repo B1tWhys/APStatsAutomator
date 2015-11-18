@@ -6,12 +6,16 @@
 //
 //
 
-#import "ViewSimulationResultsViewController.h"
+#import "ViewResultsViewController.h"
+#import "StatisticsCalc.h"
 
-@interface ViewSimulationResultsViewController ()
+@interface ViewResultsViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *viewSelector;
+@property (strong, nonatomic) StatisticsCalc *calc;
 @end
+
+const int numOfInfoCells = 9;
 
 @implementation ViewSimulationResultsViewController
 
@@ -25,9 +29,9 @@
     for (NSMutableArray *array in self.dataArray) {
         if (array.count != 0) {
             [array sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-                if (obj1 < obj2) {
+                if (((NSNumber *) obj1).floatValue < ((NSNumber *) obj2).floatValue) {
                     return NSOrderedAscending;
-                } else if (obj1 > obj2) {
+                } else if (((NSNumber *) obj1).floatValue > ((NSNumber *) obj2).floatValue) {
                     return NSOrderedDescending;
                 } else {
                     return NSOrderedSame;
@@ -38,8 +42,9 @@
         }
     }
     
+    self.calc = [[StatisticsCalc alloc] init];
+    
     self.dataArray = fullArray;
-
     [self.navigationController setNavigationBarHidden:false];
 }
 
@@ -63,36 +68,11 @@
     float average;
     count = (int) numbers.count;
     for (NSNumber *sample in numbers) {
-        sum += sample.intValue;
+        sum += sample.floatValue;
     }
     
     average = ((float)sum)/(float)count;
     return average;
-}
-
-- (float) median:(NSArray *)array {
-    NSMutableArray *trialArray = [array mutableCopy];
-    [trialArray sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        if (obj1 < obj2) {
-            return NSOrderedAscending;
-        } else if (obj1 > obj2) {
-            return NSOrderedDescending;
-        } else {
-            return NSOrderedSame;
-        }
-    }];
-    
-    float resultNum;
-    
-    if (!(trialArray.count % 2)) { // if count is even
-        float num1 = ((NSNumber *)trialArray[trialArray.count/2 -1]).floatValue;
-        float num2 = ((NSNumber *)trialArray[(trialArray.count/2)]).floatValue;
-        
-        resultNum = (num1 + num2)/2.0;
-    } else { // if count is odd
-        resultNum = ((NSNumber *)trialArray[(trialArray.count-1)/2]).intValue;
-    }
-    return resultNum;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -106,15 +86,15 @@
             trialResultsArray = [self.resultsArray objectAtIndex:indexPath.section];
         }
         
-        int dataForCell = ((NSNumber *)[trialDataArray objectAtIndex: indexPath.row]).intValue;
+        float dataForCell = ((NSNumber *)[trialDataArray objectAtIndex: indexPath.row]).floatValue;
         NSString *resultForCell = [trialResultsArray objectAtIndex:indexPath.row];
         
         NSString *cellString;
 
         if (trialResultsArray != nil) {
-            cellString = [NSString stringWithFormat:@"%i - %@", dataForCell, resultForCell];
+            cellString = [NSString stringWithFormat:@"%@ - %@", [NSNumber numberWithFloat: dataForCell].stringValue, resultForCell];
         } else {
-            cellString  = [NSString stringWithFormat:@"%i", dataForCell];
+            cellString  = [NSString stringWithFormat:@"%@", [NSNumber numberWithFloat: dataForCell].stringValue];
         }
         tvc.textLabel.text = cellString;
     } else {
@@ -125,21 +105,7 @@
                 cellText = [NSString stringWithFormat:@"Average: %@", [NSNumber numberWithFloat:[self average:self.dataArray[indexPath.row]]].stringValue];
                 break;
             } case 1: { // st. dev
-                float standardDeviation;
-                NSMutableArray *devsFromAvg = [NSMutableArray new];
-                float average = [self average:self.dataArray[indexPath.section]];
-
-                for (NSNumber *number in self.dataArray[indexPath.section]) {
-                    [devsFromAvg addObject:[NSNumber numberWithFloat:powf((number.floatValue - average), 2)]];
-                }
-                
-                float sum = 0;
-                for (NSNumber *num in devsFromAvg) {
-                    float floatNum = num.floatValue;
-                    sum += floatNum;
-                }
-                
-                standardDeviation = powf((sum/(devsFromAvg.count - 1)), .5); // TODO: change this to be accurate
+                float standardDeviation = [self.calc standardDeviation:self.dataArray[indexPath.section]];
                 cellText = [NSString stringWithFormat:@"Standard deviation: %@", [NSNumber numberWithFloat:standardDeviation].stringValue];
                 break;
             } case 2: { // q1
@@ -150,14 +116,13 @@
                 NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:firstHalfRange];
                 NSArray *firstHalfArray = [trialArray objectsAtIndexes:indexSet];
                 
-                float q1 = [self median:firstHalfArray];
+                float q1 = [self.calc mode:firstHalfArray];
                 cellText = [NSString stringWithFormat:@"q1: %@", [NSNumber numberWithFloat:q1].stringValue];
                 break;
             } case 3: { // median
                 NSMutableArray *trialArray = [self.dataArray[indexPath.section] mutableCopy];
                 
-                float resultNum;
-                resultNum = [self median:trialArray];
+                float resultNum = [self.calc median:trialArray];
                 
                 cellText = [NSString stringWithFormat:@"Median: %@", [NSNumber numberWithFloat:resultNum].stringValue];
                 break;
@@ -170,7 +135,7 @@
                 NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:secondHalfRange];
                 NSArray *firstHalfArray = [trialArray objectsAtIndexes:indexSet];
                 
-                float q3 = [self median:firstHalfArray];
+                float q3 = [self.calc median:firstHalfArray];
                 cellText = [NSString stringWithFormat:@"q3: %@", [NSNumber numberWithFloat:q3].stringValue];
                 break;
             } case 5: { // IQR
@@ -182,7 +147,7 @@
                 NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:firstHalfRange];
                 NSArray *firstHalfArray = [trialArray objectsAtIndexes:indexSet];
                 
-                float q1 = [self median:firstHalfArray];
+                float q1 = [self.calc median:firstHalfArray];
                 
                 length = ((trialArray.count % 2) == 0) ? ((int)(trialArray.count/2)) : (int)((trialArray.count + 1) / 2);
                 NSUInteger startPosition = ((trialArray.count % 2) == 0) ? (int)((trialArray.count - 1) / 2) : (trialArray.count/2);
@@ -191,46 +156,32 @@
                 indexSet = [NSIndexSet indexSetWithIndexesInRange:firstHalfRange];
                 firstHalfArray = [trialArray objectsAtIndexes:indexSet];
                 
-                float q3 = [self median:firstHalfArray];
+                float q3 = [self.calc median:firstHalfArray];
                 
                 float IQR = q3-q1;
-                cellText = [NSString stringWithFormat:@"IQR: %@", [NSNumber numberWithFloat:IQR].stringValue];
+                cellText = [NSString stringWithFormat:@"IQR: %@", [NSNumber numberWithFloat: IQR].stringValue];
                 
                 break;
                 
             } case 6: { // mode
-                NSMutableDictionary *modeCalcDict = [NSMutableDictionary new];
-                for (NSNumber *num in self.dataArray[indexPath.section]) {
-                    if (![modeCalcDict objectForKey:num]) {
-                        modeCalcDict[num] = @1;
-                    } else {
-                        modeCalcDict[num] = [NSNumber numberWithInt: ((NSNumber *)modeCalcDict[num]).intValue + 1];
-                    }
-                }
+                float mostCommonNumber = [self.calc mode:self.dataArray[indexPath.section]];
                 
-                NSNumber *mode = [NSNumber numberWithInt:0];
+                cellText = [NSString stringWithFormat:@"Mode: %f", mostCommonNumber];
+                break;
+            } case 7: { // correlation
+                float correlation = [self.calc correlation:self.dataArray[indexPath.section]];
                 
-                for (NSNumber *key in modeCalcDict) {
-                    if (((NSNumber *) modeCalcDict[key]).intValue > mode.intValue) {
-                        mode = key;
-                    }
-                }
+                cellText = [NSString stringWithFormat:@"r = %@", [NSNumber numberWithFloat: correlation].stringValue];
+                break;
+            } case 8: {
+                float correlation = [self.calc correlation:self.dataArray[indexPath.section]];
+                float rSquared = powf(correlation, 2);
                 
-                int mostOccurences = 0;
-                int mostCommonNumber = 0;
-                
-                for (NSNumber *num in modeCalcDict) {
-                    if (mostOccurences < ((NSNumber *)[modeCalcDict objectForKey:num]).intValue) {
-                        mostCommonNumber = ((NSNumber *)[modeCalcDict objectForKey:num]).intValue;
-                        mostOccurences = num.intValue;
-                    }
-                }
-                
-                cellText = [NSString stringWithFormat:@"Mode: %i", mostCommonNumber];
+                cellText = [NSString stringWithFormat:@"R^2 = %@", [NSNumber numberWithFloat:rSquared]];
+                break;
+            } default: {
                 break;
             }
-            default:
-                break;
         }
         
         tvc.textLabel.text = cellText;
@@ -244,14 +195,13 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSArray *sectionArray = [self.dataArray objectAtIndex:section];
     int numberOfRowsInSection = (int)sectionArray.count;
-    
     if (self.dataIsDatasource) {
         return numberOfRowsInSection;
     } else {
         if (self.calcMode) {
-            return 7;
+            return numOfInfoCells;
         } else {
-            return 6;
+            return numOfInfoCells - 1;
         }
     }
 }

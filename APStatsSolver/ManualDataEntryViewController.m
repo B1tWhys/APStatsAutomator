@@ -8,16 +8,18 @@
 
 #import "ManualDataEntryViewController.h"
 #import "DataEntryTableViewCell.h"
-#import "ViewSimulationResultsViewController.h"
+#import "ViewResultsViewController.h"
 
 @interface ManualDataEntryViewController ()
 @property (weak, nonatomic) IBOutlet UISwitch *calculateModeSlider;
 @property (weak, nonatomic) IBOutlet UITextField *numberOfTrialsTextView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIStepper *stepper;
-@property (strong, nonatomic) NSMutableArray *dataArray;
+@property (strong, nonatomic) NSMutableArray *xDataArray;
+@property (strong, nonatomic) NSMutableArray *yDataArray;
 @property (weak, nonatomic) UITextField *currentlySelectedField;
 @property (weak, nonatomic) IBOutlet UITextField *spaceDelimtedData;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *xySelector;
 @end
 
 @implementation ManualDataEntryViewController
@@ -28,8 +30,29 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.spaceDelimtedData.delegate = self;
-    
-    self.dataArray = [NSMutableArray new];
+}
+
+
+- (IBAction)updateTV:(id)sender {
+    self.numberOfTrialsTextView.text = [[NSNumber alloc] initWithUnsignedLong: self.dataArray.count].stringValue;
+    self.stepper.value = (int) self.dataArray.count;
+    [self.tableView reloadData];
+}
+
+- (NSMutableArray *)dataArray {
+    if (self.xySelector.selectedSegmentIndex == 0) { // if x is selected
+        return self.xDataArray;
+    } else {
+        return self.yDataArray;
+    }
+}
+
+- (void)setDataArray:(NSMutableArray *)dataArray {
+    if (self.xySelector.selectedSegmentIndex == 0) { // if x is selected
+        self.xDataArray = dataArray;
+    } else {
+        self.yDataArray = dataArray;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,7 +105,7 @@
         DataEntryTableViewCell *cell = ((DataEntryTableViewCell *) sender.superview.superview); // the TVCe
         NSIndexPath *indexPath = [self.tableView indexPathForCell: cell];
         NSMutableArray *trial = [NSMutableArray arrayWithArray:self.dataArray[indexPath.section]];
-        trial[indexPath.row] = [NSNumber numberWithInt: sender.text.intValue];
+        trial[indexPath.row] = [NSNumber numberWithFloat: sender.text.floatValue];
         if ([sender.text isEqualToString:@""]) {
             [trial removeLastObject];
         }
@@ -91,19 +114,22 @@
             self.dataArray[indexPath.section] = trial;
             [self.tableView reloadData];
             
-            DataEntryTableViewCell *newCell = (DataEntryTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+            DataEntryTableViewCell *currentCell = (DataEntryTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
             NSArray *visibleCells = self.tableView.visibleCells;
             NSMutableString *testStr = [NSMutableString new];
             for (DataEntryTableViewCell *cell in visibleCells) {
                 [testStr appendString:cell.entryField.text];
             }
             
+            NSIndexPath *indexPathToNewCell = [NSIndexPath indexPathForRow:indexPath.row+1 inSection:indexPath.section];
+            DataEntryTableViewCell *newCell = [self.tableView cellForRowAtIndexPath:indexPathToNewCell];
+            
             if (![self.tableView.visibleCells containsObject:newCell]) {
-                [self.tableView scrollToRowAtIndexPath: [self.tableView indexPathForCell:newCell]
+                [self.tableView scrollToRowAtIndexPath: indexPathToNewCell
                                       atScrollPosition:UITableViewScrollPositionBottom
                                               animated:true];
             }
-            [newCell.entryField becomeFirstResponder];
+            [currentCell.entryField becomeFirstResponder];
         } else {
             self.dataArray[indexPath.section] = trial;
         }
@@ -172,15 +198,17 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.destinationViewController isMemberOfClass:[ViewSimulationResultsViewController class]]) {
+    if ([segue.destinationViewController isMemberOfClass:[ViewResultsViewController class]]) {
         if (self.dataArray.count != 0) {
-            ViewSimulationResultsViewController *destinationVC = segue.destinationViewController;
-            destinationVC.dataArray = self.dataArray;
+            ViewResultsViewController *destinationVC = segue.destinationViewController;
+            destinationVC.dataArray1 = self.xDataArray;
+            destinationVC.dataArray2 = self.yDataArray;
+            
             destinationVC.resultsArray = [NSMutableArray new];
             destinationVC.calcMode = self.calculateModeSlider.on;
         } else { // use text entry
-            ViewSimulationResultsViewController *destinationVC = segue.destinationViewController;
-            destinationVC.dataArray = [NSMutableArray arrayWithArray:@[[NSMutableArray arrayWithArray:[self parseDataString]]]];
+            ViewResultsViewController *destinationVC = segue.destinationViewController;
+            destinationVC.dataArray1 = [NSMutableArray arrayWithArray:@[[NSMutableArray arrayWithArray:[self parseDataString]]]];
             destinationVC.resultsArray = [NSMutableArray new];
             destinationVC.calcMode = self.calculateModeSlider.on;
         }

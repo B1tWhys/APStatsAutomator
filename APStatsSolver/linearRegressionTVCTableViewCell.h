@@ -10,4 +10,6 @@
 
 @interface linearRegressionTVCTableViewCell : UITableViewCell
 
+@property (nonatomic) float xVal;
+@property (nonatomic) float yVal;
 @end

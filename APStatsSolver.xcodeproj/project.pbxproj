@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D42E8E441BB728D90051B44D /* ManualDataEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D42E8E431BB728D90051B44D /* ManualDataEntryViewController.m */; settings = {ASSET_TAGS = (); }; };
+		D42E8E441BB728D90051B44D /* ManualDataEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D42E8E431BB728D90051B44D /* ManualDataEntryViewController.m */; };
+		D44D6CBA1BD06506009CDAE3 /* StatisticsCalc.m in Sources */ = {isa = PBXBuildFile; fileRef = D44D6CB91BD06506009CDAE3 /* StatisticsCalc.m */; };
 		D45F59EF1B9A91F3006E65BD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D45F59EE1B9A91F3006E65BD /* main.m */; };
 		D45F59F21B9A91F3006E65BD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D45F59F11B9A91F3006E65BD /* AppDelegate.m */; };
 		D45F59F51B9A91F3006E65BD /* OCRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D45F59F41B9A91F3006E65BD /* OCRViewController.m */; };
@@ -15,13 +16,16 @@
 		D45F59FA1B9A91F3006E65BD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D45F59F91B9A91F3006E65BD /* Images.xcassets */; };
 		D45F59FD1B9A91F3006E65BD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D45F59FB1B9A91F3006E65BD /* LaunchScreen.xib */; };
 		D45F5A091B9A91F3006E65BD /* APStatsSolverTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D45F5A081B9A91F3006E65BD /* APStatsSolverTests.m */; };
+		D46257241BF2E1F4007308B6 /* LinRegresFromStatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D46257231BF2E1F4007308B6 /* LinRegresFromStatsViewController.m */; };
 		D47B821A1B9A960300279229 /* SimAutomatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D47B82171B9A960300279229 /* SimAutomatorViewController.m */; };
-		D47B821B1B9A960300279229 /* ViewSimulationResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D47B82191B9A960300279229 /* ViewSimulationResultsViewController.m */; };
+		D47B821B1B9A960300279229 /* ViewResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D47B82191B9A960300279229 /* ViewResultsViewController.m */; };
 		D47B82201B9AA2AF00279229 /* CropImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D47B821F1B9AA2AF00279229 /* CropImageViewController.m */; };
 		D47B82231B9AA5B300279229 /* CropRectDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = D47B82221B9AA5B300279229 /* CropRectDisplayView.m */; };
 		D49A12331B9B7BF4002AE03A /* CropViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D49A12321B9B7BF4002AE03A /* CropViewController.storyboard */; };
 		D4AC43EB1BAE1313003E610A /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = D4AC43EA1BAE1313003E610A /* tessdata */; };
-		D4ECE5FA1BB75BE70051CA0F /* DataEntryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4ECE5F91BB75BE70051CA0F /* DataEntryTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		D4ECE5FA1BB75BE70051CA0F /* DataEntryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4ECE5F91BB75BE70051CA0F /* DataEntryTableViewCell.m */; };
+		D4ECF4821BED4A2400856856 /* linearRegressionTVCTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4ECF4811BED4A2400856856 /* linearRegressionTVCTableViewCell.m */; };
+		D4ECF4861BED4A4E00856856 /* linearRegressionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4ECF4851BED4A4E00856856 /* linearRegressionViewController.m */; };
 		E3353DE214E0686F52248216 /* libPods-APStatsSolver.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3428F6111D5583147BA74F2 /* libPods-APStatsSolver.a */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +45,8 @@
 		C3428F6111D5583147BA74F2 /* libPods-APStatsSolver.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-APStatsSolver.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D42E8E421BB728D90051B44D /* ManualDataEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ManualDataEntryViewController.h; path = APStatsSolver/ManualDataEntryViewController.h; sourceTree = "<group>"; };
 		D42E8E431BB728D90051B44D /* ManualDataEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ManualDataEntryViewController.m; path = APStatsSolver/ManualDataEntryViewController.m; sourceTree = "<group>"; };
+		D44D6CB81BD06506009CDAE3 /* StatisticsCalc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatisticsCalc.h; path = model/StatisticsCalc.h; sourceTree = "<group>"; };
+		D44D6CB91BD06506009CDAE3 /* StatisticsCalc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatisticsCalc.m; path = model/StatisticsCalc.m; sourceTree = "<group>"; };
 		D45F59E91B9A91F3006E65BD /* APStatsSolver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APStatsSolver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D45F59ED1B9A91F3006E65BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D45F59EE1B9A91F3006E65BD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -54,10 +60,12 @@
 		D45F5A021B9A91F3006E65BD /* APStatsSolverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = APStatsSolverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D45F5A071B9A91F3006E65BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D45F5A081B9A91F3006E65BD /* APStatsSolverTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APStatsSolverTests.m; sourceTree = "<group>"; };
+		D46257221BF2E1F4007308B6 /* LinRegresFromStatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinRegresFromStatsViewController.h; sourceTree = "<group>"; };
+		D46257231BF2E1F4007308B6 /* LinRegresFromStatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinRegresFromStatsViewController.m; sourceTree = "<group>"; };
 		D47B82161B9A960300279229 /* SimAutomatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimAutomatorViewController.h; sourceTree = "<group>"; };
 		D47B82171B9A960300279229 /* SimAutomatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimAutomatorViewController.m; sourceTree = "<group>"; };
-		D47B82181B9A960300279229 /* ViewSimulationResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewSimulationResultsViewController.h; sourceTree = "<group>"; };
-		D47B82191B9A960300279229 /* ViewSimulationResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewSimulationResultsViewController.m; sourceTree = "<group>"; };
+		D47B82181B9A960300279229 /* ViewResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewResultsViewController.h; sourceTree = "<group>"; };
+		D47B82191B9A960300279229 /* ViewResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewResultsViewController.m; sourceTree = "<group>"; };
 		D47B821E1B9AA2AF00279229 /* CropImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropImageViewController.h; sourceTree = "<group>"; };
 		D47B821F1B9AA2AF00279229 /* CropImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropImageViewController.m; sourceTree = "<group>"; };
 		D47B82211B9AA5B300279229 /* CropRectDisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropRectDisplayView.h; sourceTree = "<group>"; };
@@ -66,6 +74,10 @@
 		D4AC43EA1BAE1313003E610A /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
 		D4ECE5F81BB75BE70051CA0F /* DataEntryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataEntryTableViewCell.h; path = APStatsSolver/DataEntryTableViewCell.h; sourceTree = "<group>"; };
 		D4ECE5F91BB75BE70051CA0F /* DataEntryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataEntryTableViewCell.m; path = APStatsSolver/DataEntryTableViewCell.m; sourceTree = "<group>"; };
+		D4ECF4801BED4A2400856856 /* linearRegressionTVCTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = linearRegressionTVCTableViewCell.h; sourceTree = "<group>"; };
+		D4ECF4811BED4A2400856856 /* linearRegressionTVCTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = linearRegressionTVCTableViewCell.m; sourceTree = "<group>"; };
+		D4ECF4841BED4A4E00856856 /* linearRegressionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = linearRegressionViewController.h; sourceTree = "<group>"; };
+		D4ECF4851BED4A4E00856856 /* linearRegressionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = linearRegressionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,10 +157,13 @@
 				D45F59F41B9A91F3006E65BD /* OCRViewController.m */,
 				D47B82161B9A960300279229 /* SimAutomatorViewController.h */,
 				D47B82171B9A960300279229 /* SimAutomatorViewController.m */,
+				D44D6CB81BD06506009CDAE3 /* StatisticsCalc.h */,
+				D44D6CB91BD06506009CDAE3 /* StatisticsCalc.m */,
+				D4ECF4831BED4A2800856856 /* Linear Regression */,
 				D42E8E401BB728940051B44D /* Manual data entry */,
 				D4B924901B9B713600C0C1D4 /* Image cropping */,
-				D47B82181B9A960300279229 /* ViewSimulationResultsViewController.h */,
-				D47B82191B9A960300279229 /* ViewSimulationResultsViewController.m */,
+				D47B82181B9A960300279229 /* ViewResultsViewController.h */,
+				D47B82191B9A960300279229 /* ViewResultsViewController.m */,
 				D45F59F61B9A91F3006E65BD /* Main.storyboard */,
 				D45F59F91B9A91F3006E65BD /* Images.xcassets */,
 				D45F59FB1B9A91F3006E65BD /* LaunchScreen.xib */,
@@ -196,6 +211,19 @@
 			name = "Image cropping";
 			sourceTree = "<group>";
 		};
+		D4ECF4831BED4A2800856856 /* Linear Regression */ = {
+			isa = PBXGroup;
+			children = (
+				D46257221BF2E1F4007308B6 /* LinRegresFromStatsViewController.h */,
+				D46257231BF2E1F4007308B6 /* LinRegresFromStatsViewController.m */,
+				D4ECF4801BED4A2400856856 /* linearRegressionTVCTableViewCell.h */,
+				D4ECF4811BED4A2400856856 /* linearRegressionTVCTableViewCell.m */,
+				D4ECF4841BED4A4E00856856 /* linearRegressionViewController.h */,
+				D4ECF4851BED4A4E00856856 /* linearRegressionViewController.m */,
+			);
+			name = "Linear Regression";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -209,6 +237,7 @@
 				D45F59E71B9A91F3006E65BD /* Resources */,
 				4B3CE1B664DA634D458B576C /* Copy Pods Resources */,
 				D4B9248F1B9ABD7D00C0C1D4 /* Run Script */,
+				9BA3E2187596D8F27FB79B1A /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -328,6 +357,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		9BA3E2187596D8F27FB79B1A /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-APStatsSolver/Pods-APStatsSolver-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D4B9248F1B9ABD7D00C0C1D4 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -350,11 +394,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				D47B82201B9AA2AF00279229 /* CropImageViewController.m in Sources */,
+				D44D6CBA1BD06506009CDAE3 /* StatisticsCalc.m in Sources */,
 				D45F59F51B9A91F3006E65BD /* OCRViewController.m in Sources */,
-				D47B821B1B9A960300279229 /* ViewSimulationResultsViewController.m in Sources */,
+				D47B821B1B9A960300279229 /* ViewResultsViewController.m in Sources */,
 				D4ECE5FA1BB75BE70051CA0F /* DataEntryTableViewCell.m in Sources */,
 				D42E8E441BB728D90051B44D /* ManualDataEntryViewController.m in Sources */,
+				D46257241BF2E1F4007308B6 /* LinRegresFromStatsViewController.m in Sources */,
 				D47B82231B9AA5B300279229 /* CropRectDisplayView.m in Sources */,
+				D4ECF4821BED4A2400856856 /* linearRegressionTVCTableViewCell.m in Sources */,
+				D4ECF4861BED4A4E00856856 /* linearRegressionViewController.m in Sources */,
 				D45F59F21B9A91F3006E65BD /* AppDelegate.m in Sources */,
 				D45F59EF1B9A91F3006E65BD /* main.m in Sources */,
 				D47B821A1B9A960300279229 /* SimAutomatorViewController.m in Sources */,

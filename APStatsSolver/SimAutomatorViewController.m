@@ -7,7 +7,7 @@
 //
 
 #import "SimAutomatorViewController.h"
-#import "ViewSimulationResultsViewController.h"
+#import "ViewResultsViewController.h"
 
 @interface SimAutomatorViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *maxNumInputField;
@@ -164,9 +164,9 @@
 #pragma Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.destinationViewController isMemberOfClass:[ViewSimulationResultsViewController class]]) {
-        ViewSimulationResultsViewController *destinationVC = segue.destinationViewController;
-        destinationVC.dataArray = self.dataArray;
+    if ([segue.destinationViewController isMemberOfClass:[ViewResultsViewController class]]) {
+        ViewResultsViewController *destinationVC = segue.destinationViewController;
+        destinationVC.dataArray1 = self.dataArray;
         destinationVC.resultsArray = self.resultsArray;
     }
 }

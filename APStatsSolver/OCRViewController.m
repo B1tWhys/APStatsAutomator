@@ -8,7 +8,7 @@
 
 #import "OCRViewController.h"
 #import "CropImageViewController.h"
-#import "ViewSimulationResultsViewController.h"
+#import "ViewResultsViewController.h"
 
 @import MobileCoreServices;
 
@@ -41,14 +41,14 @@
 
 - (void)imageCroppingFinishedWithImage:(UIImage *)image {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    ViewSimulationResultsViewController *resultsVC = [storyboard instantiateViewControllerWithIdentifier:@"ResultsTableView"];
-    resultsVC.dataArray = [NSMutableArray arrayWithArray: @[@[@2, @3, @4, @5]]];
+    ViewResultsViewController *resultsVC = [storyboard instantiateViewControllerWithIdentifier:@"ResultsTableView"];
+    resultsVC.dataArray1 = [NSMutableArray arrayWithArray: @[@[@2, @3, @4, @5]]];
     resultsVC.calcMode = false;
     [self.navigationController pushViewController:resultsVC animated:true];
 
     G8Tesseract *tesseract = [[G8Tesseract alloc] initWithLanguage:@"eng" engineMode:G8OCREngineModeTesseractCubeCombined];
     tesseract.delegate = self;
-
+    
     tesseract.image = image;
     [tesseract recognize];
 

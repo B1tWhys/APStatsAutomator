@@ -1,8 +1,8 @@
 CLANG_CXX_LIBRARY = compiler-default
-FRAMEWORK_SEARCH_PATHS = "$(PODS_ROOT)/Crashlytics" "$(PODS_ROOT)/Fabric"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Crashlytics" "${PODS_ROOT}/Fabric"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Crashlytics" "${PODS_ROOT}/Headers/Public/Crashlytics/Crashlytics" "${PODS_ROOT}/Headers/Public/Fabric" "${PODS_ROOT}/Headers/Public/Fabric/Fabric" "${PODS_ROOT}/Headers/Public/Reveal-iOS-SDK" "${PODS_ROOT}/Headers/Public/Reveal-iOS-SDK/Reveal" "${PODS_ROOT}/Headers/Public/TesseractOCRiOS" "${PODS_ROOT}/Headers/Public/TesseractOCRiOS/TesseractOCR"
-LIBRARY_SEARCH_PATHS = "$(PODS_ROOT)/TesseractOCRiOS/TesseractOCR/lib" "$(PODS_ROOT)/TesseractOCRiOS/TesseractOCR/lib"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/Crashlytics" -isystem "${PODS_ROOT}/Headers/Public/Crashlytics/Crashlytics" -isystem "${PODS_ROOT}/Headers/Public/Fabric" -isystem "${PODS_ROOT}/Headers/Public/Fabric/Fabric" -isystem "${PODS_ROOT}/Headers/Public/Reveal-iOS-SDK" -isystem "${PODS_ROOT}/Headers/Public/Reveal-iOS-SDK/Reveal" -isystem "${PODS_ROOT}/Headers/Public/TesseractOCRiOS" -isystem "${PODS_ROOT}/Headers/Public/TesseractOCRiOS/TesseractOCR"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Crashlytics" "${PODS_ROOT}/Headers/Public/Fabric" "${PODS_ROOT}/Headers/Public/Reveal-iOS-SDK" "${PODS_ROOT}/Headers/Public/TesseractOCRiOS"
+LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/TesseractOCRiOS/TesseractOCR/lib" $(inherited) "${PODS_ROOT}/TesseractOCRiOS/TesseractOCR/lib"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/Crashlytics" -isystem "${PODS_ROOT}/Headers/Public/Fabric" -isystem "${PODS_ROOT}/Headers/Public/Reveal-iOS-SDK" -isystem "${PODS_ROOT}/Headers/Public/TesseractOCRiOS"
 OTHER_LDFLAGS = $(inherited) -ObjC -weak_library /usr/lib/libstdc++.6.0.9.dylib -l"TesseractOCRiOS" -l"c++" -l"lept" -l"stdc++" -l"tesseract_all" -l"z" -framework "Crashlytics" -framework "Fabric" -framework "Foundation" -framework "Security" -framework "SystemConfiguration" -framework "UIKit"
 PODS_ROOT = ${SRCROOT}/Pods

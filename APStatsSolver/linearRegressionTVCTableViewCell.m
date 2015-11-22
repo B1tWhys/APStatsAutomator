@@ -13,6 +13,17 @@
 - (void)awakeFromNib {
     // Initialization code
 }
+- (IBAction)xValFieldChanged:(UITextField *)sender {
+    NSString *fieldString = sender.text;
+    float xValFloat = [fieldString floatValue];
+    self.xVal = xValFloat;
+}
+
+- (IBAction)yValFieldChanged:(UITextField *)sender {
+    NSString *fieldString = sender.text;
+    float yValFloat = [fieldString floatValue];
+    self.yVal = yValFloat;
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

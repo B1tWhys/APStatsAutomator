@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface linearRegressionViewController : UIViewController
+@interface linearRegressionViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end

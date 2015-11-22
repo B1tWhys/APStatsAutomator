@@ -17,7 +17,7 @@
 
 const int numOfInfoCells = 9;
 
-@implementation ViewSimulationResultsViewController
+@implementation ViewResultsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,7 +26,7 @@ const int numOfInfoCells = 9;
     self.tableView.dataSource = self;
     NSMutableArray *fullArray = [NSMutableArray new];
 
-    for (NSMutableArray *array in self.dataArray) {
+    for (NSMutableArray *array in self.dataArray1) {
         if (array.count != 0) {
             [array sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
                 if (((NSNumber *) obj1).floatValue < ((NSNumber *) obj2).floatValue) {
@@ -44,7 +44,9 @@ const int numOfInfoCells = 9;
     
     self.calc = [[StatisticsCalc alloc] init];
     
-    self.dataArray = fullArray;
+    [self.calc correlation:@[@1, @2, @3, @4, @5, @6] array2:@[@1, @2, @3, @4, @5, @6]];
+    
+    self.dataArray1 = fullArray;
     [self.navigationController setNavigationBarHidden:false];
 }
 
@@ -80,7 +82,7 @@ const int numOfInfoCells = 9;
     if (!tvc) tvc = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"StatsViewerTableViewCell"];
     
     if (self.dataIsDatasource) {
-        NSArray *trialDataArray = [self.dataArray objectAtIndex:indexPath.section];
+        NSArray *trialDataArray = [self.dataArray1 objectAtIndex:indexPath.section];
         NSArray *trialResultsArray = nil;
         if (self.resultsArray.count != 0) {
             trialResultsArray = [self.resultsArray objectAtIndex:indexPath.section];
@@ -102,32 +104,32 @@ const int numOfInfoCells = 9;
         
         switch (indexPath.row) {
             case 0: { // avg
-                cellText = [NSString stringWithFormat:@"Average: %@", [NSNumber numberWithFloat:[self average:self.dataArray[indexPath.row]]].stringValue];
+                cellText = [NSString stringWithFormat:@"Average: %@", [NSNumber numberWithFloat:[self average:self.dataArray1[indexPath.row]]].stringValue];
                 break;
             } case 1: { // st. dev
-                float standardDeviation = [self.calc standardDeviation:self.dataArray[indexPath.section]];
+                float standardDeviation = [self.calc standardDeviation:self.dataArray1[indexPath.section]];
                 cellText = [NSString stringWithFormat:@"Standard deviation: %@", [NSNumber numberWithFloat:standardDeviation].stringValue];
                 break;
             } case 2: { // q1
-                NSMutableArray *trialArray = [self.dataArray[indexPath.section] mutableCopy];
-                NSUInteger length = ((trialArray.count % 2) == 0) ? ((int)(trialArray.count/2)) : (int)((trialArray.count + 1) / 2);
+                NSMutableArray *trialArray = [self.dataArray1[indexPath.section] mutableCopy];
+                NSUInteger length = ((trialArray.count % 2) == 0) ? ((int)(trialArray.count/2)+1) : (int)((trialArray.count + 1) / 2);
                 
                 NSRange firstHalfRange = NSMakeRange(0, length);
                 NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:firstHalfRange];
                 NSArray *firstHalfArray = [trialArray objectsAtIndexes:indexSet];
                 
-                float q1 = [self.calc mode:firstHalfArray];
+                float q1 = [self.calc median:firstHalfArray];
                 cellText = [NSString stringWithFormat:@"q1: %@", [NSNumber numberWithFloat:q1].stringValue];
                 break;
             } case 3: { // median
-                NSMutableArray *trialArray = [self.dataArray[indexPath.section] mutableCopy];
+                NSMutableArray *trialArray = [self.dataArray1[indexPath.section] mutableCopy];
                 
                 float resultNum = [self.calc median:trialArray];
                 
                 cellText = [NSString stringWithFormat:@"Median: %@", [NSNumber numberWithFloat:resultNum].stringValue];
                 break;
             } case 4: { // q3
-                NSMutableArray *trialArray = [self.dataArray[indexPath.section] mutableCopy];
+                NSMutableArray *trialArray = [self.dataArray1[indexPath.section] mutableCopy];
                 NSUInteger length = ((trialArray.count % 2) == 0) ? ((int)(trialArray.count/2)) : (int)((trialArray.count + 1) / 2);
                 NSUInteger startPosition = ((trialArray.count % 2) == 0) ? (int)((trialArray.count) / 2) : ((trialArray.count - 1) /2);
                 
@@ -139,7 +141,7 @@ const int numOfInfoCells = 9;
                 cellText = [NSString stringWithFormat:@"q3: %@", [NSNumber numberWithFloat:q3].stringValue];
                 break;
             } case 5: { // IQR
-                NSMutableArray *trialArray = [self.dataArray[indexPath.section] mutableCopy];
+                NSMutableArray *trialArray = [self.dataArray1[indexPath.section] mutableCopy];
                 NSUInteger length = ((trialArray.count % 2) == 0) ? ((int)(trialArray.count/2)) : (int)((trialArray.count + 1) / 2);
                 
                 
@@ -164,19 +166,19 @@ const int numOfInfoCells = 9;
                 break;
                 
             } case 6: { // mode
-                float mostCommonNumber = [self.calc mode:self.dataArray[indexPath.section]];
+                float mostCommonNumber = [self.calc mode:self.dataArray1[indexPath.section]];
                 
                 cellText = [NSString stringWithFormat:@"Mode: %f", mostCommonNumber];
                 break;
             } case 7: { // correlation
-                float correlation = [self.calc correlation:self.dataArray[indexPath.section]];
-                
+//                float correlation = [self.calc correlation:self.dataArray1[indexPath.section]];
+                float correlation = 20;
                 cellText = [NSString stringWithFormat:@"r = %@", [NSNumber numberWithFloat: correlation].stringValue];
                 break;
             } case 8: {
-                float correlation = [self.calc correlation:self.dataArray[indexPath.section]];
-                float rSquared = powf(correlation, 2);
-                
+  //              float correlation = [self.calc correlation:self.dataArray1[indexPath.section]];
+//                float rSquared = powf(correlation, 2);
+                float rSquared = 20;
                 cellText = [NSString stringWithFormat:@"R^2 = %@", [NSNumber numberWithFloat:rSquared]];
                 break;
             } default: {
@@ -193,7 +195,7 @@ const int numOfInfoCells = 9;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSArray *sectionArray = [self.dataArray objectAtIndex:section];
+    NSArray *sectionArray = [self.dataArray1 objectAtIndex:section];
     int numberOfRowsInSection = (int)sectionArray.count;
     if (self.dataIsDatasource) {
         return numberOfRowsInSection;
@@ -212,7 +214,7 @@ const int numOfInfoCells = 9;
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.dataArray.count;
+    return self.dataArray1.count;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LinRegresFromStatsViewController : UIViewController
+@interface LinRegresFromStatsViewController : UIViewController <UITextFieldDelegate>
 
 @end

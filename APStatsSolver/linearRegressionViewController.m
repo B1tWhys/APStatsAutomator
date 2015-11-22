@@ -7,9 +7,12 @@
 //
 
 #import "linearRegressionViewController.h"
+#import "linearRegressionTVCTableViewCell.h"
 
 @interface linearRegressionViewController ()
-
+@property (weak, nonatomic) IBOutlet UITableView *tvc;
+@property (nonatomic) int numOfRows;
+@property (strong, nonatomic) NSMutableDictionary *dataDictionary;
 @end
 
 @implementation linearRegressionViewController
@@ -17,21 +20,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.dataDictionary = [NSMutableDictionary new];
+    
+    self.numOfRows = 1;
+    
+    self.tvc.delegate = self;
+    self.tvc.dataSource = self;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    
 }
-*/
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    linearRegressionTVCTableViewCell *cell = [self.tvc dequeueReusableCellWithIdentifier:@"LinRegresInputCell"];
+    
+    if (!cell) {
+        cell = [[linearRegressionTVCTableViewCell alloc] init];
+    }
+    
+    self.dataDictionary[[NSNumber numberWithInt:indexPath.row]] = @[[NSNumber numberWithFloat:cell.xVal], [NSNumber numberWithFloat:cell.yVal]];
+    cell.tag = indexPath.row;
+
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.numOfRows;
+}
 
 @end

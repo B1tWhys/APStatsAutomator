@@ -34,6 +34,7 @@
 }
 
 - (float) square: (float)num {return powf(num, 2.0);}
+- (float) sqrt: (float) num {return powf(num, .5);}
 
 - (NSArray *)squareArray: (NSArray *)array {
     NSMutableArray *resultArray = [array mutableCopy];
@@ -47,18 +48,38 @@
     return resultArray;
 }
 
-- (float) correlation: (NSArray *)array1 array2:(NSArray *)array2 {
-    NSArray *squareArray1 = [self squareArray: array1.copy];
-    NSArray *squareArray2 = [self squareArray: array2.copy];
+- (float) correlation: (NSArray *)arrayX array2:(NSArray *)arrayY {
+    NSArray *squareArrayX = [self squareArray: arrayX.copy];
+    NSArray *squareArrayY = [self squareArray: arrayY.copy];
     
-    float count1 = squareArray1.count;
-    float count2 = squareArray2.count;
+    float count = squareArrayX.count;
+    float countY = squareArrayY.count;
+    NSAssert(count == countY, @"The length of the X variables array was %f, but the length of the Y array was %f", count, countY);
     
     
+    float sumX = [self sum:arrayX];
+    float sumY = [self sum:arrayY];
     
-    NSMutableArray *array = [NSMutableArray new];
+    float sumXYProduct = 0;
+    for (int i = 0; i < count; i++) {
+        sumXYProduct += ((NSNumber *)arrayX[i]).floatValue * ((NSNumber *)arrayY[i]).floatValue;
+    }
     
-    return 2.0;
+    float sumOfSquaresX = [self sum:squareArrayX];
+    float sumOfSquaresY = [self sum:squareArrayY];
+    
+    float sumSquaredX = [self square:sumX];
+    float sumSquaredY = [self square:sumY];
+    
+    float numerator = (count*sumXYProduct) - (sumX * sumY);
+    float denominatorLeftTerm = (([self sqrt:(count * sumOfSquaresX)]) - sumSquaredX);
+    float denominatorRightTerm = (([self sqrt:(count * sumOfSquaresY)]) - sumSquaredY);
+    
+    float denominator = denominatorLeftTerm * denominatorRightTerm;
+    
+    float correlation = numerator/denominator;
+    
+    return correlation;
 }
 
 - (float) median:(NSArray *)array {

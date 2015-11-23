@@ -44,7 +44,7 @@ const int numOfInfoCells = 9;
     
     self.calc = [[StatisticsCalc alloc] init];
     
-    [self.calc correlation:@[@1, @2, @3, @4, @5, @6] array2:@[@1, @2, @3, @4, @5, @6]];
+    float testCorrelation = [self.calc correlation:@[@1, @2, @3, @4, @5, @6] array2:@[@1, @2, @3, @4, @5, @6]];
     
     self.dataArray1 = fullArray;
     [self.navigationController setNavigationBarHidden:false];

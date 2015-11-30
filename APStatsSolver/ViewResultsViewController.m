@@ -44,8 +44,11 @@ const int numOfInfoCells = 9;
     
     self.calc = [[StatisticsCalc alloc] init];
     
-    float testCorrelation = [self.calc correlation:@[@1, @2, @3, @4, @5, @6] array2:@[@1, @2, @3, @4, @5, @6]];
-    
+//    self.dataArray1 = @[@26, @49, @68, @3, @59, @89, @63, @64, @57, @50, @9, @80, @17, @5, @86, @27, @8, @6, @99, @94, @25].mutableCopy;
+//    self.dataArray2 = @[@26, @49, @68, @3, @59, @89, @63, @64, @57, @50, @9, @80, @17, @5, @86, @27, @8, @6, @99, @94, @25].mutableCopy;
+//
+//    float testCorrelation = [self.calc correlation:testXArray array2:testYArray];
+//    
     self.dataArray1 = fullArray;
     [self.navigationController setNavigationBarHidden:false];
 }
@@ -62,19 +65,6 @@ const int numOfInfoCells = 9;
                     animations:^{
                            [self.tableView reloadData];
                     } completion:^(BOOL finished) {}];
-}
-
-- (float) average:(NSArray *)numbers {
-    int sum = 0;
-    NSUInteger count = 0;
-    float average;
-    count = (int) numbers.count;
-    for (NSNumber *sample in numbers) {
-        sum += sample.floatValue;
-    }
-    
-    average = ((float)sum)/(float)count;
-    return average;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -104,7 +94,7 @@ const int numOfInfoCells = 9;
         
         switch (indexPath.row) {
             case 0: { // avg
-                cellText = [NSString stringWithFormat:@"Average: %@", [NSNumber numberWithFloat:[self average:self.dataArray1[indexPath.row]]].stringValue];
+                cellText = [NSString stringWithFormat:@"Average: %@", [NSNumber numberWithFloat:[self.calc average:self.dataArray1[indexPath.row]]].stringValue];
                 break;
             } case 1: { // st. dev
                 float standardDeviation = [self.calc standardDeviation:self.dataArray1[indexPath.section]];
@@ -171,14 +161,12 @@ const int numOfInfoCells = 9;
                 cellText = [NSString stringWithFormat:@"Mode: %f", mostCommonNumber];
                 break;
             } case 7: { // correlation
-//                float correlation = [self.calc correlation:self.dataArray1[indexPath.section]];
-                float correlation = 20;
+                float correlation = [self.calc correlation:self.dataArray1[indexPath.section] array2:self.dataArray2[indexPath.section]];
                 cellText = [NSString stringWithFormat:@"r = %@", [NSNumber numberWithFloat: correlation].stringValue];
                 break;
             } case 8: {
-  //              float correlation = [self.calc correlation:self.dataArray1[indexPath.section]];
-//                float rSquared = powf(correlation, 2);
-                float rSquared = 20;
+                float correlation = [self.calc correlation:self.dataArray1[indexPath.section] array2:self.dataArray2[indexPath.section]];
+                float rSquared = powf(correlation, 2);
                 cellText = [NSString stringWithFormat:@"R^2 = %@", [NSNumber numberWithFloat:rSquared]];
                 break;
             } default: {

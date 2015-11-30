@@ -48,6 +48,9 @@
     return resultArray;
 }
 
+
+// equation for correlation coefficient
+// http://mathbits.com/MathBits/TISection/Statistics2/correlation.htm
 - (float) correlation: (NSArray *)arrayX array2:(NSArray *)arrayY {
     NSArray *squareArrayX = [self squareArray: arrayX.copy];
     NSArray *squareArrayY = [self squareArray: arrayY.copy];
@@ -72,8 +75,8 @@
     float sumSquaredY = [self square:sumY];
     
     float numerator = (count*sumXYProduct) - (sumX * sumY);
-    float denominatorLeftTerm = (([self sqrt:(count * sumOfSquaresX)]) - sumSquaredX);
-    float denominatorRightTerm = (([self sqrt:(count * sumOfSquaresY)]) - sumSquaredY);
+    float denominatorLeftTerm = [self sqrt:((count * sumOfSquaresX) - sumSquaredX)];
+    float denominatorRightTerm = [self sqrt:((count * sumOfSquaresY) - sumSquaredY)];
     
     float denominator = denominatorLeftTerm * denominatorRightTerm;
     

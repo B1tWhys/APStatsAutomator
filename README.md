@@ -1,0 +1,1 @@
+This is an iOS app designed to solve some of the math in AP Statistics. I wrote this because I can't be bothered to spend 5 minutes entering things into a calculator, and must instead spend hours writing an app to do it for me. It isn't pretty, it doesn't work that well, but I was able to use Siri to enter charts into my phone, so I count it as a win.

@@ -8,10 +8,13 @@
 
 #import "ViewResultsViewController.h"
 #import "StatisticsCalc.h"
+#import "LinRegresFromStatsViewController.h"
 
 @interface ViewResultsViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *viewSelector;
+@property (strong, nonatomic) NSMutableArray *sortedXArray;
+@property (strong, nonatomic) NSMutableArray *sortedYArray;
 @property (strong, nonatomic) StatisticsCalc *calc;
 @end
 
@@ -28,26 +31,43 @@ const int numOfInfoCells = 9;
 
     for (NSMutableArray *array in self.dataArray1) {
         if (array.count != 0) {
-            [array sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-                if (((NSNumber *) obj1).floatValue < ((NSNumber *) obj2).floatValue) {
-                    return NSOrderedAscending;
-                } else if (((NSNumber *) obj1).floatValue > ((NSNumber *) obj2).floatValue) {
-                    return NSOrderedDescending;
-                } else {
-                    return NSOrderedSame;
-                }
-            }];
             
+//            self.sortedXArray = [self sortArray:self.dataArray1];
+//            self.sortedYArray = [self sortArray:self.dataArray2];
+//            
             [fullArray addObject:array];
         }
     }
     
-    self.calc = [[StatisticsCalc alloc] init];
+    if (((NSArray *)self.dataArray1[0]).count == ((NSArray *)self.dataArray2[0]).count) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(segueToLinRegression)];
+    }
     
-    float testCorrelation = [self.calc correlation:@[@1, @2, @3, @4, @5, @6] array2:@[@1, @2, @3, @4, @5, @6]];
+    self.calc = [[StatisticsCalc alloc] init];
     
     self.dataArray1 = fullArray;
     [self.navigationController setNavigationBarHidden:false];
+}
+
+- (NSMutableArray *)sortArray:(NSMutableArray *)array;
+{
+    NSMutableArray *sortArray = array.mutableCopy;
+    
+    [sortArray sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        if (((NSNumber *) obj1).floatValue < ((NSNumber *) obj2).floatValue) {
+            return NSOrderedAscending;
+        } else if (((NSNumber *) obj1).floatValue > ((NSNumber *) obj2).floatValue) {
+            return NSOrderedDescending;
+        } else {
+            return NSOrderedSame;
+        }
+    }];
+    
+    return sortArray;
+}
+
+- (void) segueToLinRegression {
+    [self performSegueWithIdentifier:@"segueToLinReg" sender:self];
 }
 
 - (BOOL)dataIsDatasource {
@@ -171,14 +191,12 @@ const int numOfInfoCells = 9;
                 cellText = [NSString stringWithFormat:@"Mode: %f", mostCommonNumber];
                 break;
             } case 7: { // correlation
-//                float correlation = [self.calc correlation:self.dataArray1[indexPath.section]];
-                float correlation = 20;
+                float correlation = [self.calc correlation:self.dataArray1[indexPath.section] array2:self.dataArray2[indexPath.section]];
                 cellText = [NSString stringWithFormat:@"r = %@", [NSNumber numberWithFloat: correlation].stringValue];
                 break;
             } case 8: {
-  //              float correlation = [self.calc correlation:self.dataArray1[indexPath.section]];
-//                float rSquared = powf(correlation, 2);
-                float rSquared = 20;
+                float correlation = [self.calc correlation:self.dataArray1[indexPath.section] array2:self.dataArray2[indexPath.section]];
+                float rSquared = powf(correlation, 2);
                 cellText = [NSString stringWithFormat:@"R^2 = %@", [NSNumber numberWithFloat:rSquared]];
                 break;
             } default: {
@@ -220,6 +238,19 @@ const int numOfInfoCells = 9;
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     return [NSString stringWithFormat:@"Trial: %i", (int)section + 1];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if (segue.destinationViewController.class == [LinRegresFromStatsViewController class]) {
+        LinRegresFromStatsViewController *destinationVC = segue.destinationViewController;
+        
+        destinationVC.usePassedInValuesForAvgCorrelationAndStandardDeviation = true;
+        destinationVC.correlation = [self.calc correlation:self.dataArray1[0] array2:self.dataArray2[0]];
+        destinationVC.avgX = [self.calc average:self.dataArray1[0]];
+        destinationVC.avgY = [self.calc average:self.dataArray2[0]];
+        destinationVC.stdX = [self.calc average:self.dataArray1[0]];
+        destinationVC.stdY = [self.calc standardDeviation:self.dataArray1[0]];
+    }
 }
 
 @end

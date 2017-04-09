@@ -55,11 +55,6 @@
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if ([self.numberOfTrialsTextView.text isEqualToString:@""]) { // number of trials textField is empty
         self.dataArray = [NSMutableArray new];
@@ -147,6 +142,7 @@
         numberToolbar.items = @[[[UIBarButtonItem alloc] initWithTitle:@"Done" style: UIBarButtonItemStyleDone target: textField action: @selector(resignFirstResponder)],
                                 [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace target: nil action: nil]];
     }
+    
     [numberToolbar sizeToFit];
     self.currentlySelectedField = textField;
     textField.inputAccessoryView = numberToolbar;
@@ -177,7 +173,7 @@
         cell.entryField.text = @"";
     } else {
         NSMutableArray *trialArray = self.dataArray[indexPath.section];
-        
+
         cell.entryField.text = ((NSNumber *) trialArray[indexPath.row]).stringValue;
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -198,6 +194,9 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    self.xDataArray = @[@[@5, @4, @3, @2, @1].mutableCopy].mutableCopy;
+    self.yDataArray = @[@[@1, @2, @3, @4, @5].mutableCopy].mutableCopy;
+    
     if ([segue.destinationViewController isMemberOfClass:[ViewResultsViewController class]]) {
         if (self.dataArray.count != 0) {
             ViewResultsViewController *destinationVC = segue.destinationViewController;

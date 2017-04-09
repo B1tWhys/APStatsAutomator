@@ -1,5 +1,5 @@
 CLANG_CXX_LIBRARY = compiler-default
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Crashlytics" "${PODS_ROOT}/Fabric" "${PODS_ROOT}/Reveal-iOS-SDK/Reveal-Framework-1.5.1"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Crashlytics/iOS" "${PODS_ROOT}/Fabric/iOS" "${PODS_ROOT}/Reveal-iOS-SDK/Reveal-Framework-iOS-1.6.2"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Crashlytics" "${PODS_ROOT}/Headers/Public/Fabric" "${PODS_ROOT}/Headers/Public/Reveal-iOS-SDK" "${PODS_ROOT}/Headers/Public/TesseractOCRiOS"
 LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/TesseractOCRiOS/TesseractOCR/lib" $(inherited) "${PODS_ROOT}/TesseractOCRiOS/TesseractOCR/lib"

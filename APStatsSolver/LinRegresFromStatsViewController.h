@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface LinRegresFromStatsViewController : UIViewController <UITextFieldDelegate>
-
+@property (nonatomic) BOOL usePassedInValuesForAvgCorrelationAndStandardDeviation;
+@property (nonatomic) float correlation;
+@property (nonatomic) float avgX;
+@property (nonatomic) float avgY;
+@property (nonatomic) float stdX;
+@property (nonatomic) float stdY;
 @end

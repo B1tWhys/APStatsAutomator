@@ -33,10 +33,6 @@
     return 1;
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
-    
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     linearRegressionTVCTableViewCell *cell = [self.tvc dequeueReusableCellWithIdentifier:@"LinRegresInputCell"];
     

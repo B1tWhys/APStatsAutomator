@@ -35,6 +35,13 @@
     self.stdXField.delegate = self;
     self.avgYField.delegate = self;
     self.stdYField.delegate = self;
+    
+    if (self.usePassedInValuesForAvgCorrelationAndStandardDeviation) {
+        self.avgXField.text = [NSNumber numberWithFloat:self.avgX].stringValue;
+        self.stdXField.text = [NSNumber numberWithFloat:self.stdX].stringValue;
+        self.avgYField.text = [NSNumber numberWithFloat:self.avgX].stringValue;
+        self.stdYField.text = [NSNumber numberWithFloat:self.avgX].stringValue;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,10 +50,10 @@
 }
 
 - (IBAction)calculateLinRegres {
-    float avgX = self.avgXField.text.floatValue;
+    float stdY = self.stdYField.text.floatValue;
     float stdX = self.stdXField.text.floatValue;
     float avgY = self.avgYField.text.floatValue;
-    float stdY = self.stdYField.text.floatValue;
+    float avgX = self.avgXField.text.floatValue;
     float correlation = self.correlationField.text.floatValue;
     
     self.slope = (correlation*stdY)/stdX;

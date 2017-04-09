@@ -49,37 +49,61 @@
 }
 
 - (float) correlation: (NSArray *)arrayX array2:(NSArray *)arrayY {
-    NSArray *squareArrayX = [self squareArray: arrayX.copy];
-    NSArray *squareArrayY = [self squareArray: arrayY.copy];
+//    NSArray *squareArrayX = [self squareArray: arrayX.copy];
+//    NSArray *squareArrayY = [self squareArray: arrayY.copy];
+//    
+//    float count = squareArrayX.count;
+//    float countY = squareArrayY.count;
+//    NSAssert(count == countY, @"The length of the X variables array was %f, but the length of the Y array was %f", count, countY);
+//    
+//    float sumX = [self sum:arrayX];
+//    float sumY = [self sum:arrayY];
+//    
+//    float sumXYProduct = 0;
+//    for (int i = 0; i < count; i++) {
+//        sumXYProduct += ((NSNumber *)arrayX[i]).floatValue * ((NSNumber *)arrayY[i]).floatValue;
+//    }
+//    
+//    float sumOfSquaresX = [self sum:squareArrayX];
+//    float sumOfSquaresY = [self sum:squareArrayY];
+//    
+//    float sumSquaredX = [self square:sumX];
+//    float sumSquaredY = [self square:sumY];
+//    
+//    float numerator = (count*sumXYProduct) - (sumX * sumY);
+//    float denominatorLeftTerm = (([self sqrt:(count * sumOfSquaresX)]) - sumSquaredX);
+//    float denominatorRightTerm = (([self sqrt:(count * sumOfSquaresY)]) - sumSquaredY);
+//    
+//    float denominator = denominatorLeftTerm * denominatorRightTerm;
+//    
+//    float correlation = numerator/denominator;
+//    
+//    return correlation;
+    float xAvg = [self average:arrayX];
+    float yAvg = [self average:arrayY];
     
-    float count = squareArrayX.count;
-    float countY = squareArrayY.count;
-    NSAssert(count == countY, @"The length of the X variables array was %f, but the length of the Y array was %f", count, countY);
+    float xSTD = [self standardDeviation:arrayX];
+    float ySTD = [self standardDeviation:arrayY];
     
-    
-    float sumX = [self sum:arrayX];
-    float sumY = [self sum:arrayY];
-    
-    float sumXYProduct = 0;
-    for (int i = 0; i < count; i++) {
-        sumXYProduct += ((NSNumber *)arrayX[i]).floatValue * ((NSNumber *)arrayY[i]).floatValue;
+    float sumZScoreProducts = 0;
+    for (int i = 0; i < arrayX.count; i++) {
+        float xNum = ((NSNumber *) arrayX[i]).floatValue;
+        float yNum = ((NSNumber *) arrayY[i]).floatValue;
+        
+        float xZScore = [self zScore:xNum standardDeviation:xSTD average:xAvg];
+        float yZScore = [self zScore:yNum standardDeviation:ySTD average:yAvg];
+        
+        sumZScoreProducts += (xZScore * yZScore);
     }
     
-    float sumOfSquaresX = [self sum:squareArrayX];
-    float sumOfSquaresY = [self sum:squareArrayY];
-    
-    float sumSquaredX = [self square:sumX];
-    float sumSquaredY = [self square:sumY];
-    
-    float numerator = (count*sumXYProduct) - (sumX * sumY);
-    float denominatorLeftTerm = (([self sqrt:(count * sumOfSquaresX)]) - sumSquaredX);
-    float denominatorRightTerm = (([self sqrt:(count * sumOfSquaresY)]) - sumSquaredY);
-    
-    float denominator = denominatorLeftTerm * denominatorRightTerm;
-    
-    float correlation = numerator/denominator;
+    float correlation = (sumZScoreProducts/(arrayX.count -1));
     
     return correlation;
+}
+
+- (float) zScore:(float)number standardDeviation:(float)std average:(float)average {
+    float zScore = (number-average)/std;
+    return zScore;
 }
 
 - (float) median:(NSArray *)array {
